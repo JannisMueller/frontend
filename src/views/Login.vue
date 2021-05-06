@@ -39,6 +39,8 @@ export default {
 }
 </script>
 
+<!--Tillfälliga färger-->
+
 <style scoped>
 .login {
   position: fixed;
@@ -51,16 +53,17 @@ export default {
   height: 100%;
   background-color: rgba(0,0,0,0.8);
 }
-
 form {
   position: relative;
-  flex-basis: 400px;
+  width: 400px;
+  height: 500px;
   background-color: #B3B3B3;
-  padding: 20px;
+  padding: 60px 40px;
 }
 
 h2 {
   text-align: center;
+  margin-bottom: 60px;
 }
 
 input {
@@ -70,13 +73,19 @@ input {
   border: 0;
   border-radius: 5px;
   padding-left: 10px;
+}
+
+input:first-of-type {
   margin-bottom: 20px;
+}
+
+input:last-of-type {
+  margin-bottom: 40px;
 }
 
 input:focus {
   outline: none;
 }
-
 .login_btn {
   font-weight: bold;
   width: 100%;
@@ -87,6 +96,7 @@ input:focus {
   border: 0;
   border-radius: 10px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .login_btn:focus {
@@ -99,10 +109,13 @@ p {
 
 .close_btn {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 10px;
   cursor: pointer;
   text-decoration: none;
+  font-weight: bold;
+  font-size: 28px;
+  color: #181818;
 }
 
 </style>

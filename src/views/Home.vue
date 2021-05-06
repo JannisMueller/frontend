@@ -4,6 +4,7 @@
     <p>No teacher, no books, learn on the fly</p>
     <figure></figure>
     <router-link to="/login" tag="button" class="start_btn">Start Quiz</router-link>
+    <router-view></router-view>
   </div>
 </template>
 

@@ -53,6 +53,7 @@ nav {
 h1 {
   font-family: Norwester;
   letter-spacing: 2px;
+  padding: 10px 0 10px 20px;
 }
 
 ul {
@@ -66,16 +67,19 @@ ul.active {
 li {
   list-style-type: none;
   text-align: center;
+  padding-bottom: 20px;
 }
 
 a {
   text-decoration: none;
+  color: #181818;
 }
 
 .toggle_btn {
   position: absolute;
-  top: 0;
-  right: 0
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1025px) {
@@ -91,7 +95,8 @@ a {
 
   li {
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 40px;
+    padding-bottom: 0;
   }
 
   .toggle_btn {

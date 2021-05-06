@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
+import Login from '@/views/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -8,7 +9,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: '/login',
+        component: Login,
+        name: 'Login'
+      }
+    ]
   },
   {
     path: '/about',
@@ -30,12 +38,6 @@ const routes = [
     name: 'References',
     component: () => import('@/views/References.vue')
   },
-
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/Login.vue')
-  },
   {
     path: '/signup',
     name: 'Signup',
@@ -50,4 +52,7 @@ const router = new VueRouter({
 })
 
 export default router
+
+// Användaren får komma åt /quiz om hen har loggat in eller registrerat ett konto.
+// TODO: https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards https://router.vuejs.org/guide/advanced/meta.html
 
