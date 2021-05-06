@@ -1,12 +1,48 @@
 <template>
   <div id="app">
+    <NavigationBar
+        :nav-links="navLinks"
+    />
     <router-view />
   </div>
 </template>
 
 <script>
+import NavigationBar from "@/components/NavigationBar";
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    NavigationBar
+  },
+  data: () => ({
+    navLinks: [
+      {
+        text: 'Home',
+        path: '/',
+      },
+      {
+        text: 'About',
+        path: '/about'
+      },
+      {
+        text: 'Learn',
+        path: '/learn'
+      },
+      {
+        text: 'Quiz',
+        path: '/quiz'
+      },
+      {
+        text: 'References',
+        path: '/references'
+      },
+      {
+        text: 'Log In',
+        path: '/login'
+      }
+    ]
+  })
 }
 </script>
 
@@ -18,10 +54,23 @@ export default {
   padding: 0;
   box-sizing: border-box;
   letter-spacing: 1px;
+  font-family: 'Roboto', sans-serif;
+}
+
+html {
+  height: 100%;
 }
 
 body {
-  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
   min-height: 100%;
 }
+
+#app {
+
+}
+
 </style>
+

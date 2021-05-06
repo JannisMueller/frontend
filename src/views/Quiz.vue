@@ -1,12 +1,12 @@
 <template>
   <div class="quiz">
-    <h1>Welcome, User</h1>
+    <h2>Welcome, User</h2>
     <button class="logout_btn" @click="logout">Logout</button>
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase'
 
 export default {
   name: 'Quiz',
@@ -16,7 +16,7 @@ export default {
           .auth()
           .signOut()
           .then(() => {
-            this.$router.push('/');
+            this.$router.push('/')
           })
           .catch(err => {
             alert(err.message)
@@ -26,7 +26,6 @@ export default {
 }
 </script>
 <style scoped>
-
 .quiz {
   display: flex;
   flex-direction: column;
@@ -34,21 +33,17 @@ export default {
   align-items: center;
 }
 
-h1 {
-  font-family: 'Roboto', sans-serif;
+h2 {
   font-weight: bold;
-  color: #FFFFFF;
-  margin: 70px 0 40px 0;
 }
 
 .logout_btn {
   background-color: #50C594;
   color: #181818;
-  font-family: 'Roboto', sans-serif;
   font-weight: bold;
   font-size: 18px;
   text-transform: uppercase;
-  padding: 20px;
+  padding: 10px;
   border: 0;
   border-radius: 10px;
   cursor: pointer;
@@ -56,10 +51,6 @@ h1 {
 
 .logout_btn:focus {
   outline: none;
-}
-
-.logout_btn:hover {
-  background-color: #B3B3B3;
 }
 
 </style>

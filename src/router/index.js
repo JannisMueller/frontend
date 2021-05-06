@@ -11,22 +11,35 @@ const routes = [
     component: Home
   },
   {
+    path: '/about',
+    name: 'About',
+    component: () => import('@/views/About.vue')
+  },
+  {
+    path: '/learn',
+    name: 'Learn',
+    component: () => import('@/views/Learn.vue')
+  },
+  {
+    path: '/quiz',
+    name: 'Quiz',
+    component: () => import('@/views/Quiz.vue')
+  },
+  {
+    path: '/references',
+    name: 'References',
+    component: () => import('@/views/References.vue')
+  },
+
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login.vue')
   },
   {
     path: '/signup',
-    name: 'SignUp',
+    name: 'Signup',
     component: () => import('@/views/Signup.vue')
-  },
-  {
-    path: '/quiz',
-    name: 'Quiz',
-    component: () => import('@/views/Quiz.vue'),
-    meta: {
-      requiresAuth: true
-    }
   }
 ]
 
@@ -37,3 +50,4 @@ const router = new VueRouter({
 })
 
 export default router
+
