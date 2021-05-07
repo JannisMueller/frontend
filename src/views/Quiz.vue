@@ -1,31 +1,21 @@
 <template>
   <div class="quiz">
     <h1>Welcome, User</h1>
-    <button class="logout_btn" @click="logout">Logout</button>
+    <QuizData/>
+
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
+import QuizData from "@/components/QuizData";
 
 export default {
   name: 'Quiz',
-  methods: {
-    logout() {
-      firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            this.$router.push('/');
-          })
-          .catch(err => {
-            alert(err.message)
-          });
-    }
-  }
+  components: {QuizData},
 }
 </script>
 <style scoped>
+/*
 
 .quiz {
   display: flex;
@@ -61,5 +51,6 @@ h1 {
 .logout_btn:hover {
   background-color: #B3B3B3;
 }
+*/
 
 </style>

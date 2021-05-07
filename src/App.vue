@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
   margin: 0;
@@ -23,5 +23,5 @@ export default {
 body {
   background-color: #181818;
   min-height: 100%;
-}
+}*/
 </style>
