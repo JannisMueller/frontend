@@ -4,16 +4,19 @@
         :nav-links="navLinks"
     />
     <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
 import NavigationBar from "@/components/NavigationBar";
+import Footer from "@/components/Footer";
 
 export default {
   name: 'App',
   components: {
-    NavigationBar
+    NavigationBar,
+    Footer
   },
   data: () => ({
     navLinks: [
@@ -64,12 +67,14 @@ html {
 body {
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
+  background-color: beige;
   min-height: 100%;
+  position: relative;
 }
 
 #app {
-
+  margin-top: 60px;
+  margin-bottom: 80px;
 }
 
 </style>

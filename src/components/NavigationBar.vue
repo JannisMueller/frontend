@@ -48,16 +48,22 @@ nav {
   flex-direction: column;
   width: 100%;
   background-color: #B3B3B3;
+  min-height: 60px;
+  position:fixed;
+  top: 0;
+  left: 0;
+  z-index: 1; /* indicates that the sidebar is on top of everything else */
 }
 
 h1 {
   font-family: Norwester;
   letter-spacing: 2px;
-  padding: 10px 0 10px 20px;
+  margin: 15px 0 15px 20px;
 }
 
 ul {
   display: none;
+
 }
 
 ul.active {
@@ -77,7 +83,7 @@ a {
 
 .toggle_btn {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 20px;
   cursor: pointer;
 }

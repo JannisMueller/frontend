@@ -51,14 +51,17 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.7);
+  z-index: 5;
 }
+
 form {
   position: relative;
   width: 400px;
   height: 500px;
-  background-color: #B3B3B3;
+  background-color: beige;
   padding: 60px 40px;
+  border-radius: 10px;
 }
 
 h2 {

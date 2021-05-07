@@ -22,11 +22,29 @@ export default {
   align-items: center;
 }
 
+h2 {
+  margin: 30px 0 10px 0;
+}
+
+p {
+  margin-bottom: 30px;
+}
+
 figure {
   width: 300px;
   height: 300px;
   background-image: url("../assets/landingpage.png");
   background-size: cover;
+  margin-bottom: 30px;
+}
+
+.start_btn {
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px 40px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .start_btn:focus {
