@@ -8,7 +8,7 @@
         We assume that you are interested in learning coding, but don't know where to start, do you?
         Then we very much welcome you here.<br>
         <br>
-        This course is focused on one of the popular programming language "Java".
+        This course is focused on one of the popular programming languages "Java".
         Java is a class-based, object-oriented language that is designed to have as few implementation dependencies as possible.<br>
         <br>
         What is "class-based"? What is "object-oriented"?
@@ -19,7 +19,7 @@
         You can also start taking quizzes right away from <router-link to="/quiz">Quiz</router-link>.<br>
         <br>
         We recommend you to <router-link to="/signup">sign up</router-link> with us to get to know more about Java, if you'd like to!
-        Or in <router-link to="/references">References</router-link> page, you will see some useful information links to learn more by yourself as well.<br>
+        Or in <router-link to="/references">References</router-link>, you will see some useful information links to learn more by yourself as well.<br>
         <br>
         Thank you for visiting us, and enjoy!
       </p>
@@ -56,6 +56,12 @@ h2 {
 p {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: seagreen;
 }
 
 figure {
