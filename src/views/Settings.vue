@@ -1,17 +1,17 @@
 <template>
   <div>
-    <NavBar />
-    References
+    <QuizNavBar />
+    Settings
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/Navbar'
+import QuizNavBar from "@/components/QuizNavbar"
 
 export default {
-  name: 'References',
+  name: "Settings",
   components: {
-    NavBar
+    QuizNavBar
   }
 }
 </script>

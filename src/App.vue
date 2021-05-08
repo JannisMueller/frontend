@@ -1,51 +1,18 @@
 <template>
   <div id="app">
-    <NavigationBar
-        :nav-links="navLinks"
-    />
-    <router-view />
     <Footer />
+    <router-view />
   </div>
 </template>
 
 <script>
-import NavigationBar from "@/components/NavigationBar";
-import Footer from "@/components/Footer";
+import Footer from '@/components/Footer'
 
 export default {
   name: 'App',
   components: {
-    NavigationBar,
     Footer
-  },
-  data: () => ({
-    navLinks: [
-      {
-        text: 'Home',
-        path: '/',
-      },
-      {
-        text: 'About',
-        path: '/about'
-      },
-      {
-        text: 'Learn',
-        path: '/learn'
-      },
-      {
-        text: 'Quiz',
-        path: '/quiz'
-      },
-      {
-        text: 'References',
-        path: '/references'
-      },
-      {
-        text: 'Log In',
-        path: '/login'
-      }
-    ]
-  })
+  }
 }
 </script>
 
@@ -65,17 +32,15 @@ html {
 }
 
 body {
+  position: relative;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   background-color: beige;
-  min-height: 100%;
-  position: relative;
 }
 
 #app {
-  margin-top: 60px;
-  margin-bottom: 80px;
+  margin: 60px 0 80px 0;
 }
 
 </style>
-

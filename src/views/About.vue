@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <NavBar />
     <h2>About JAVA JOURNEY</h2>
     <figure></figure>
     <div id="text">
@@ -28,8 +29,13 @@
 </template>
 
 <script>
+import NavBar from '@/components/Navbar'
+
 export default {
-name: "About"
+  name: "About",
+  components: {
+    NavBar
+  }
 }
 </script>
 

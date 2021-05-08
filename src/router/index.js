@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
-import Login from '@/views/Login.vue'
+import Home from '@/views/Home'
+import Login from "@/views/Login"
+import firebase from 'firebase'
 
 Vue.use(VueRouter)
 
@@ -13,8 +14,8 @@ const routes = [
     children: [
       {
         path: '/login',
-        component: Login,
-        name: 'Login'
+        name: 'Login',
+        component: Login
       }
     ]
   },
@@ -31,7 +32,10 @@ const routes = [
   {
     path: '/quiz',
     name: 'Quiz',
-    component: () => import('@/views/Quiz.vue')
+    component: () => import('@/views/Quiz.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/references',
@@ -42,17 +46,58 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: () => import('@/views/Signup.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/views/Profile'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import('@/views/Settings'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
+
+// Lägga till fler paths => frågor. Children till Quiz? Fixa paths fär inloggad användare => en version 2 av paths?
+// TODO: paths och fixa så att en inloggad användare får tillgång till about, learn och references utan att ändra navbar
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
+
+router.beforeEach((to, from, next)  => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if(requiresAuth) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        next('/login');
+      } else {
+        next();
+      }
+    });
+  }
+  else if(!requiresAuth) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        next('/quiz');
+      } else {
+        next();
+      }
+    });
+  }
+  else {
+    next();
+  }
+});
 
 export default router
-
-// Användaren får komma åt /quiz om hen har loggat in eller registrerat ett konto.
-// TODO: https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards https://router.vuejs.org/guide/advanced/meta.html
 

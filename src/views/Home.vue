@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <NavBar />
     <h2>Welcome to JAVA JOURNEY</h2>
     <p>No teacher, no books, learn on the fly</p>
     <figure></figure>
@@ -9,8 +10,13 @@
 </template>
 
 <script>
+import NavBar from '@/components/Navbar'
+
 export default {
-  name: "Home"
+  name: 'Home',
+  components: {
+    NavBar
+  }
 }
 </script>
 
@@ -42,7 +48,7 @@ figure {
   font-weight: bold;
   font-size: 18px;
   padding: 20px 40px;
-  border: 2px solid rgba(0,0,0,0.2);
+  border: 2px solid #B3B3B3;
   border-radius: 10px;
   cursor: pointer;
 }

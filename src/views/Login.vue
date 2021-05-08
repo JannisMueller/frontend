@@ -39,40 +39,38 @@ export default {
 }
 </script>
 
-<!--Tillfälliga färger-->
-
 <style scoped>
 .login {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 5;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.7);
-  z-index: 5;
 }
 
 form {
   position: relative;
   width: 400px;
   height: 500px;
-  background-color: beige;
-  padding: 60px 40px;
+  background-color: #B3B3B3;
+  padding: 50px 30px;
   border-radius: 10px;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 70px;
 }
 
 input {
   font-weight: normal;
   width: 100%;
-  height: 40px;
+  height: 50px;
   border: 0;
   border-radius: 5px;
   padding-left: 10px;
@@ -83,16 +81,18 @@ input:first-of-type {
 }
 
 input:last-of-type {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 input:focus {
   outline: none;
 }
+
 .login_btn {
-  font-weight: bold;
   width: 100%;
-  height: 40px;
+  height: 60px;
+  font-weight: bold;
+  font-size: 18px;
   text-transform: uppercase;
   background-color: #50C594;
   color: #181818;
@@ -122,3 +122,5 @@ p {
 }
 
 </style>
+
+<!--Tillfälliga färger-->
