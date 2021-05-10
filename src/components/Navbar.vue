@@ -5,7 +5,7 @@
         :class="{ active: isActive }"
     >
       <li
-          v-for="(link, index) in navLinks"
+          v-for="(link, index) in links"
           :key="index"
           @click="isActive = false"
       >
@@ -15,48 +15,50 @@
           {{ link.name}}
         </router-link>
       </li>
+      <li v-if="user" >
+        <a @click="logout">Log Out</a>
+      </li>
+      <li v-else>
+        <router-link to="/login">Log In</router-link>
+      </li>
     </ul>
     <font-awesome-icon class="toggle_btn" :icon="['fas', 'bars']" size="2x" @click="toggleNavbar" />
   </nav>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'NavBar',
+  props: ['links'],
   data() {
     return {
       isActive: false,
-      navLinks: [
-        {
-          name: 'Home',
-          path: '/',
-        },
-        {
-          name: 'About',
-          path: '/about'
-        },
-        {
-          name: 'Learn',
-          path: '/learn'
-        },
-        {
-          name: 'Quiz',
-          path: '/quiz'
-        },
-        {
-          name: 'References',
-          path: '/references'
-        },
-        {
-          name: 'Log In',
-          path: '/login'
-        }
-      ]
+      user: null,
     }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.user = user;
+        console.log('logged in');
+      }
+      else {
+        this.user = null;
+        console.log('logged out');
+      }
+    });
   },
   methods: {
     toggleNavbar() {
       this.isActive = !this.isActive;
+    },
+    logout() {
+      firebase.auth().signOut().then(() => {
+        this.$router.push({ path: 'login' }).catch(() => {});
+        // https://stackoverflow.com/questions/62462276/how-to-solve-avoided-redundant-navigation-to-current-location-error-in-vue
+      });
     }
   }
 }
@@ -79,7 +81,7 @@ nav {
   background-color: #B3B3B3;
 }
 h1 {
-  font-family: Norwester;
+  font-family: Norwester, 'Roboto', sans-serif;
   letter-spacing: 2px;
   margin: 15px 0 15px 20px;
 }
@@ -97,6 +99,7 @@ li {
 a {
   text-decoration: none;
   color: #181818;
+  cursor: pointer;
 }
 .toggle_btn {
   position: absolute;

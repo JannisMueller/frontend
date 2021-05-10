@@ -1,17 +1,31 @@
 <template>
   <div id="app">
+    <Navbar :links="navLinks" />
     <Footer />
     <router-view />
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 
 export default {
   name: 'App',
   components: {
+    Navbar,
     Footer
+  },
+  data() {
+    return {
+      navLinks: [
+        {name: 'Home', path: '/'},
+        {name: 'About', path: '/about'},
+        {name: 'Learn', path: '/learn'},
+        {name: 'Quiz', path: '/quiz'},
+        {name: 'References', path: '/references'}
+      ]
+    }
   }
 }
 </script>

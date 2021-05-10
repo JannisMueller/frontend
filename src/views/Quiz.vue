@@ -1,18 +1,12 @@
 <template>
   <div class="quiz">
-    <QuizNavBar />
     <h2>Welcome, User</h2>
   </div>
 </template>
 
 <script>
-import QuizNavBar from '@/components/QuizNavbar'
-
 export default {
-  name: 'Quiz',
-  components: {
-    QuizNavBar
-  }
+  name: 'Quiz'
 }
 </script>
 <style scoped>

@@ -24,16 +24,9 @@ export default {
   },
   methods: {
     login() {
-      firebase
-          .auth()
-          .signInWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            this.$router.replace('quiz');
-
-          })
-          .catch(err => {
-            alert(err.message);
-          });
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
+        this.$router.push({ path: 'quiz' }).catch(() => {});
+      });
     }
   }
 }
@@ -52,7 +45,6 @@ export default {
   height: 100%;
   background-color: rgba(0,0,0,0.7);
 }
-
 form {
   position: relative;
   width: 400px;
@@ -61,12 +53,10 @@ form {
   padding: 50px 30px;
   border-radius: 10px;
 }
-
 h2 {
   text-align: center;
   margin-bottom: 70px;
 }
-
 input {
   font-weight: normal;
   width: 100%;
@@ -75,19 +65,15 @@ input {
   border-radius: 5px;
   padding-left: 10px;
 }
-
 input:first-of-type {
   margin-bottom: 20px;
 }
-
 input:last-of-type {
   margin-bottom: 50px;
 }
-
 input:focus {
   outline: none;
 }
-
 .login_btn {
   width: 100%;
   height: 60px;
@@ -101,15 +87,12 @@ input:focus {
   cursor: pointer;
   margin-bottom: 20px;
 }
-
 .login_btn:focus {
   outline: none;
 }
-
 p {
   text-align: center;
 }
-
 .close_btn {
   position: absolute;
   top: 5px;
@@ -122,5 +105,3 @@ p {
 }
 
 </style>
-
-<!--Tillfälliga färger-->

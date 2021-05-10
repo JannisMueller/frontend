@@ -1,18 +1,12 @@
 <template>
   <div>
-    <NavBar />
     References
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/Navbar'
-
 export default {
-  name: 'References',
-  components: {
-    NavBar
-  }
+  name: 'References'
 }
 </script>
 

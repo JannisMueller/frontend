@@ -1,6 +1,5 @@
 <template>
   <div class="signup">
-    <NavBar />
     <form @submit.prevent="signUp">
       <h2>Create Account</h2>
       <input type="email" placeholder="Email" v-model="email">
@@ -13,13 +12,9 @@
 
 <script>
 import firebase from 'firebase'
-import NavBar from '@/components/Navbar'
 
 export default {
   name: 'SignUp',
-  components: {
-    NavBar
-  },
   data() {
     return {
       email: '',
@@ -28,15 +23,9 @@ export default {
   },
   methods: {
     signUp() {
-      firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            this.$router.replace('quiz');
-          })
-          .catch(err => {
-            alert(err.message);
-          });
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
+        this.$router.push({ path: 'quiz'}).catch(() => {});
+      });
     }
   }
 }

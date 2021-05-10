@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <NavBar />
     <h2>Welcome to JAVA JOURNEY</h2>
     <p>No teacher, no books, learn on the fly</p>
     <figure></figure>
@@ -10,13 +9,8 @@
 </template>
 
 <script>
-import NavBar from '@/components/Navbar'
-
 export default {
-  name: 'Home',
-  components: {
-    NavBar
-  }
+  name: 'Home'
 }
 </script>
 
@@ -39,7 +33,7 @@ p {
 figure {
   width: 300px;
   height: 300px;
-  background-image: url("../assets/landingpage.png");
+  background-image: url("../assets/landing-page.png");
   background-size: cover;
   margin-bottom: 30px;
 }
