@@ -26,13 +26,42 @@
 
         </form>
         </div>
+
       </li>
+      <div v-show="questionIndex === questions.length">
+        <h2>
+          Quiz finished
+        </h2>
+        <p>
+          Total score: {{ points }} / {{ questions.length }}
+        </p>
+
+        <ul>
+          <li v-for="list in scoreList"
+          v-bind:key="list.id">
+            <p>{{list.id+1}}</p>
+            <p>{{list.title}}</p>
+
+            <p>{{list.correct}}</p>
+
+          </li>
+
+
+          <router-link to="/" tag="button" class="start_btn">Back to home</router-link>
+
+          <router-view> </router-view>
+
+          <button @click="tryAgain"> Try Again!</button>
+
+        </ul>
+
+      </div>
     </ul>
-    <button v-if="questionIndex > 0" v-on:click="prev">
+    <button v-if="questionIndex > 0 && questionIndex < questions.length" v-on:click="prev">
       prev
     </button>
 
-    <button v-on:click="next">
+    <button v-show="questionIndex < questions.length" v-on:click="next">
       next
     </button>
 
@@ -49,22 +78,51 @@ export default {
       questionIndex: 0,
       picked:'',
       points: 0,
+      isCorrect: "wrong answer",
+      scoreList: []
 
     }
   },
   methods: {
 
+    tryAgain: function () {
+
+          this.questionIndex= 0,
+          this.picked='',
+          this.points= 0,
+          this.isCorrect= "wrong answer",
+          this.scoreList= []
+
+    },
+
+    checkScore: function () {
+      let x = {
+        id: this.questionIndex-1,
+        title: this.questions[this.questionIndex-1].questionTitle,
+        correct: this.isCorrect
+      }
+      console.log("x: " + x)
+      return this.scoreList.push(x);
+
+    },
+
     next: function() {
       this.questionIndex++;
-      let correctedAnswer = this.questions[this.questionIndex-1].correctAnswer
-      if(this.picked === correctedAnswer){
+
+      let correct = (this.questions[this.questionIndex-1].correctAnswer).toString();
+      if(this.picked === correct){
         this.points++;
+        this.isCorrect= "correct answer";
+        console.log("inloop")
       }
+      this.checkScore();
       console.log("question Index: " + this.questionIndex)
       console.log("picked: " + this.picked)
       console.log("points: " + this.points)
-      console.log("correct Answer: " + correctedAnswer)
+      console.log("correct Answer: " + this.questions[this.questionIndex-1].correctAnswer)
+      console.log ("correct: "  + correct)
       this.picked='';
+      this.isCorrect= "wrong answer";
 
     },
     prev: function() {
