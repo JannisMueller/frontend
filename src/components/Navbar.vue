@@ -7,7 +7,7 @@
       <li
           v-for="(link, index) in links"
           :key="index"
-          @click="isActive = false"
+          @click="toggleNavbar"
       >
         <router-link
             :to="link.path"
@@ -15,10 +15,10 @@
           {{ link.name}}
         </router-link>
       </li>
-      <li v-if="user" >
+      <li v-if="user" @click="toggleNavbar">
         <a @click="logout">Log Out</a>
       </li>
-      <li v-else>
+      <li v-else @click="toggleNavbar" >
         <router-link to="/login">Log In</router-link>
       </li>
     </ul>
@@ -56,7 +56,7 @@ export default {
     },
     logout() {
       firebase.auth().signOut().then(() => {
-        this.$router.push({ path: 'login' }).catch(() => {});
+        this.$router.push('/login').catch(() => {});
         // https://stackoverflow.com/questions/62462276/how-to-solve-avoided-redundant-navigation-to-current-location-error-in-vue
       });
     }

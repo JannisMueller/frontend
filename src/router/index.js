@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Login from "@/views/Login"
+import firebase from 'firebase'
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,10 @@ const routes = [
   {
     path: '/quiz',
     name: 'Quiz',
-    component: () => import('@/views/Quiz.vue')
+    component: () => import('@/views/Quiz.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/references',
@@ -51,7 +55,36 @@ const router = new VueRouter({
   routes
 });
 
-//TODO: Navigation guards and meta properties
+router.beforeEach((to, from, next)  => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if(requiresAuth) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        next('/login');
+      } else {
+        next();
+      }
+    });
+  } else if(!requiresAuth && to.path === '/login') {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        next('/quiz');
+      } else {
+        next();
+      }
+    });
+  } else if(!requiresAuth && to.path === '/signup') {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        next('/quiz');
+      } else {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+});
 
 export default router
 

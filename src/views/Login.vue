@@ -25,7 +25,7 @@ export default {
   methods: {
     login() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-        this.$router.push({ path: 'quiz' }).catch(() => {});
+        this.$router.push('/quiz').catch(() => {});
       });
     }
   }
