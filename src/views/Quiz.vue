@@ -3,6 +3,7 @@
     <h1>Welcome, User</h1>
     <QuizData/>
 
+    <h2>Welcome, User</h2>
   </div>
 </template>
 
@@ -11,7 +12,8 @@ import QuizData from "@/components/QuizData";
 
 export default {
   name: 'Quiz',
-  components: {QuizData},
+  components: {QuizData}
+
 }
 </script>
 <style scoped>
@@ -24,33 +26,12 @@ export default {
   align-items: center;
 }
 
-h1 {
-  font-family: 'Roboto', sans-serif;
+h2 {
   font-weight: bold;
   color: #FFFFFF;
   margin: 70px 0 40px 0;
 }
 
-.logout_btn {
-  background-color: #50C594;
-  color: #181818;
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  font-size: 18px;
-  text-transform: uppercase;
-  padding: 20px;
-  border: 0;
-  border-radius: 10px;
-  cursor: pointer;
-}
 
-.logout_btn:focus {
-  outline: none;
-}
-
-.logout_btn:hover {
-  background-color: #B3B3B3;
-}
-*/
 
 </style>

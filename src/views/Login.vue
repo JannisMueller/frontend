@@ -1,17 +1,18 @@
 <template>
   <div class="login">
-    <router-link to="/"><font-awesome-icon :icon="['fas', 'angle-left']" size="2x" class="back_btn" /></router-link>
     <form @submit.prevent="login">
-      <h1>Welcome Back!</h1>
+      <h2>Welcome Back!</h2>
       <input type="email" placeholder="Email" v-model="email">
       <input type="password" placeholder="Password" v-model="password">
-      <button class="login_btn">Login</button>
+      <button class="login_btn">Log in</button>
+      <p>New to Java Journey? <router-link to="/signup">Sign Up</router-link></p>
+      <router-link class="close_btn" to="/">&times;</router-link>
     </form>
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase'
 
 export default {
   name: 'Login',
@@ -24,56 +25,52 @@ export default {
   methods: {
     login() {
       firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          this.$router.replace('quiz');
-        })
-        .catch(err => {
-          alert(err.message);
-        });
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(() => {
+            this.$router.replace('quiz');
+
+          })
+          .catch(err => {
+            alert(err.message);
+          });
     }
   }
 }
 </script>
 
 <style scoped>
-.back_btn {
-  margin: 10px 0 70px 20px;
-  color: #B3B3B3;
-}
-
-h1 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  color: #FFFFFF;
-  margin-bottom: 60px;
+.login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  flex-basis: 400px;
+  background-color: #B3B3B3;
+  padding: 20px;
 }
 
-input:first-of-type {
-  margin-bottom: 20px;
-}
-
-input:last-of-type {
-  margin-bottom: 60px;
+h2 {
+  text-align: center;
 }
 
 input {
-  font-family: 'Roboto', sans-serif;
   font-weight: normal;
-  color: #606060;
-  width: 350px;
-  height: 50px;
-  border-radius: 7px;
-  padding-left: 10px;
+  width: 100%;
+  height: 40px;
   border: 0;
+  border-radius: 5px;
+  padding-left: 10px;
+  margin-bottom: 20px;
 }
 
 input:focus {
@@ -81,14 +78,12 @@ input:focus {
 }
 
 .login_btn {
-  font-family: 'Roboto', sans-serif;
   font-weight: bold;
+  width: 100%;
+  height: 40px;
   text-transform: uppercase;
   background-color: #50C594;
   color: #181818;
-  font-size: 18px;
-  width: 350px;
-  padding: 20px 0;
   border: 0;
   border-radius: 10px;
   cursor: pointer;
@@ -98,8 +93,16 @@ input:focus {
   outline: none;
 }
 
-.login_btn:hover {
-  background-color: #B3B3B3;
+p {
+  text-align: center;
+}
+
+.close_btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 </style>

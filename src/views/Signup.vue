@@ -2,7 +2,7 @@
   <div class="signup">
     <router-link to="/"><font-awesome-icon :icon="['fas', 'angle-left']" size="2x" class="back_btn" /></router-link>
     <form @submit.prevent="signUp">
-      <h1>Create Account</h1>
+      <h2>Create Account</h2>
       <input type="email" placeholder="Email" v-model="email">
       <input type="password" placeholder="Password" v-model="password">
       <button class="signup_btn">Sign Up</button>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase'
 
 export default {
   name: 'SignUp',
@@ -39,15 +39,12 @@ export default {
 
 <style scoped>
 .back_btn {
-  margin: 10px 0 70px 20px;
   color: #B3B3B3;
 }
 
-h1 {
-  font-family: 'Roboto', sans-serif;
+h2 {
   font-weight: bold;
-  color: #FFFFFF;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 form {
@@ -57,23 +54,15 @@ form {
   align-items: center;
 }
 
-input:first-of-type {
-  margin-bottom: 20px;
-}
-
-input:last-of-type {
-  margin-bottom: 60px;
-}
-
 input {
-  font-family: 'Roboto', sans-serif;
+  width: 400px;
+  height: 50px;
+  margin-bottom: 20px;
   font-weight: normal;
   color: #606060;
-  width: 350px;
-  height: 50px;
-  border-radius: 7px;
-  padding-left: 10px;
-  border: 0;
+  border-radius: 5px;
+  border: 2px solid rgba(0,0,0,0.2);
+  padding-left: 10px
 }
 
 input:focus {
@@ -81,14 +70,13 @@ input:focus {
 }
 
 .signup_btn {
-  font-family: 'Roboto', sans-serif;
   font-weight: bold;
+  font-size: 18px;
   text-transform: uppercase;
   background-color: #50C594;
   color: #181818;
-  font-size: 18px;
-  width: 350px;
-  padding: 20px 0;
+  width: 400px;
+  height: 60px;
   border: 0;
   border-radius: 10px;
   cursor: pointer;
@@ -96,10 +84,6 @@ input:focus {
 
 .signup_btn:focus {
   outline: none;
-}
-
-.signup_btn:hover {
-  background-color: #B3B3B3;
 }
 
 </style>
