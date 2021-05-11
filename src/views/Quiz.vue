@@ -2,8 +2,6 @@
   <div class="quiz">
     <h1>Welcome, User</h1>
     <QuizData/>
-
-    <h2>Welcome, User</h2>
   </div>
 </template>
 
@@ -17,20 +15,6 @@ export default {
 }
 </script>
 <style scoped>
-/*
-
-.quiz {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-h2 {
-  font-weight: bold;
-  color: #FFFFFF;
-  margin: 70px 0 40px 0;
-}
 
 
 

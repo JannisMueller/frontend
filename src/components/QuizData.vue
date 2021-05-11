@@ -48,7 +48,8 @@ export default {
       questions: [],
       questionIndex: 0,
       picked:'',
-      points: 0
+      points: 0,
+
     }
   },
   methods: {
