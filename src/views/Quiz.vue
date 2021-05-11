@@ -1,6 +1,5 @@
 <template>
   <div class="quiz">
-    <h1>Welcome, User</h1>
     <QuizData/>
   </div>
 </template>
