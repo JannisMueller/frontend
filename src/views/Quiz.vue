@@ -1,16 +1,25 @@
 <template>
   <div class="quiz">
+    <h1>Welcome, User</h1>
+    <QuizData/>
+
     <h2>Welcome, User</h2>
   </div>
 </template>
 
 <script>
+import QuizData from "@/components/QuizData";
+
 export default {
-  name: 'Quiz'
+  name: 'Quiz',
+  components: {QuizData}
+
 }
 </script>
 <style scoped>
-/*.quiz {
+/*
+
+.quiz {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +28,10 @@ export default {
 
 h2 {
   font-weight: bold;
+  color: #FFFFFF;
+  margin: 70px 0 40px 0;
 }
-}*/
+
+
 
 </style>
