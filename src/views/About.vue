@@ -34,6 +34,7 @@ export default {
 </script>
 
 <style scoped>
+
 .about {
   display: flex;
   flex-direction: column;
