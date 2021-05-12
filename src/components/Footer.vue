@@ -26,13 +26,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #B3B3B3;
+  background-color: var(--color-bg-secondary);
 }
 
 li {
   display: inline-block;
   list-style-type: none;
   cursor: pointer;
+  color: var(--color-text-secondary);
 }
 
 li:not(:last-of-type) {

@@ -49,21 +49,24 @@ form {
   position: relative;
   width: 400px;
   height: 500px;
-  background-color: #B3B3B3;
+  background-color: var(--color-bg-secondary);
   padding: 50px 30px;
   border-radius: 10px;
 }
 h2 {
   text-align: center;
   margin-bottom: 70px;
+  color: var(--color-text-primary);
 }
 input {
   font-weight: normal;
   width: 100%;
   height: 50px;
-  border: 0;
+  background-color: transparent;
+  border: 2px solid var(--color-text-secondary);
   border-radius: 5px;
   padding-left: 10px;
+  color: var(--color-text-secondary);
 }
 input:first-of-type {
   margin-bottom: 20px;
@@ -80,8 +83,8 @@ input:focus {
   font-weight: bold;
   font-size: 18px;
   text-transform: uppercase;
-  background-color: #50C594;
-  color: #181818;
+  background-color: var(--color-bg-button);
+  color: var(--color-text-button);
   border: 0;
   border-radius: 10px;
   cursor: pointer;
@@ -92,6 +95,10 @@ input:focus {
 }
 p {
   text-align: center;
+  color: var(--color-text-secondary);
+}
+a {
+  color: var(--color-text-primary);
 }
 .close_btn {
   position: absolute;
@@ -101,7 +108,7 @@ p {
   text-decoration: none;
   font-weight: bold;
   font-size: 28px;
-  color: #181818;
+  color: var(--color-text-secondary);
 }
 
 </style>

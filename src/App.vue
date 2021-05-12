@@ -41,25 +41,37 @@ export default {
   font-family: 'Roboto', sans-serif;
 }
 
-:root {
-  /*Add colors with css variables (light-mode)*/
-}
-
-.dark {
-  /*Add colors with css variables (dark-mode)*/
-}
-
 html {
   height: 100%;
   scroll-behavior: smooth;
 }
+
+:root {
+  --color-bg-primary: #F9F9F9;
+  --color-bg-secondary: #FFFFFF;
+  --color-text-primary: #181818;
+  --color-text-secondary: #606060;
+  --color-bg-button: #50C594;
+  --color-text-button: #FFFFFF;
+}
+
+.dark {
+  --color-bg-primary: #181818;
+  --color-bg-secondary: #282828;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B3B3B3;
+  --color-bg-button: #03DAC5;;
+  --color-text-button: #181818;
+}
+
+/*#4DE4B4*/
 
 body {
   position: relative;
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: var(--color-bg-primary);
 }
 
 #app {

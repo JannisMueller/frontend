@@ -76,39 +76,36 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 #text {
   max-width: 700px;
   margin-left: 30px;
   margin-right: 30px;
   margin-bottom: 50px;
 }
-
 #center {
   text-align: center;
 }
-
 h2 {
-  margin-top: 25px;
+  margin-top: 30px;
   margin-bottom: 30px;
+  color: var(--color-text-primary);
 }
-
 h3 {
+  color: var(--color-text-secondary);
+  font-weight: bold;
   font-size: 20px;
   margin-top: 30px;
 }
-
 p {
+  color: var(--color-text-secondary);
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
 a {
   text-decoration: none;
   font-weight: bold;
-  color: seagreen;
+  color: var(--color-bg-button);
 }
-
 figure {
   width: 250px;
   height: 250px;

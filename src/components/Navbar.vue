@@ -87,27 +87,34 @@ nav {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  background-color: #B3B3B3;
+  background-color: var(--color-bg-secondary);
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
 }
+.dark nav {
+  box-shadow: none;
+}
+
 h1 {
   font-family: Norwester, 'Roboto', sans-serif;
   letter-spacing: 2px;
   margin: 15px 0 15px 20px;
+  color: var(--color-text-primary);
 }
 ul {
   display: none;
+  margin-left: 40px;
 }
 ul.active {
   display: block;
 }
 li {
   list-style-type: none;
-  text-align: center;
   margin-bottom: 20px;
+  font-size: 18px;
 }
 a {
   text-decoration: none;
-  color: #181818;
+  color: var(--color-text-secondary);
   cursor: pointer;
 }
 .toggle_btn {
@@ -115,7 +122,13 @@ a {
   top: 15px;
   right: 20px;
   cursor: pointer;
+  color: var(--color-text-primary)
 }
+.moon_btn, .sun_btn {
+  cursor: pointer;
+  color: var(--color-bg-button);
+}
+
 @media screen and (min-width: 1025px) {
   nav {
     flex-direction: row;

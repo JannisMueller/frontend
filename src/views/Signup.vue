@@ -35,6 +35,7 @@ export default {
 h2 {
   margin: 30px 0 50px 0;
   font-weight: bold;
+  color: var(--color-text-primary);
 }
 form {
   display: flex;
@@ -46,9 +47,10 @@ input {
   width: 400px;
   height: 50px;
   font-weight: normal;
-  color: #606060;
+  background-color: transparent;
+  color: var(--color-text-secondary);
   border-radius: 5px;
-  border: 2px solid #B3B3B3;
+  border: 2px solid var(--color-text-secondary);
   padding-left: 10px
 }
 input:first-of-type {
@@ -63,6 +65,7 @@ input:focus {
 p {
   width: 400px;
   margin-bottom: 20px;
+  color: var(--color-text-secondary);
 }
 .signup_btn {
   width: 400px;
@@ -70,8 +73,8 @@ p {
   font-weight: bold;
   font-size: 18px;
   text-transform: uppercase;
-  background-color: #50C594;
-  color: #181818;
+  background-color: var(--color-bg-button);
+  color: var(--color-text-button);
   border: 0;
   border-radius: 10px;
   cursor: pointer;

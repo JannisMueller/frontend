@@ -42,27 +42,9 @@ export default {
   align-items: center;
 }
 
-#text {
-  max-width: 500px;
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 50px;
-}
-
 h2 {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-p {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-a {
-  text-decoration: none;
-  font-weight: bold;
-  color: seagreen;
+  color: var(--color-text-primary);
+  margin: 30px 0 30px 0;
 }
 
 figure {
@@ -70,6 +52,19 @@ figure {
   height: 250px;
   background-image: url("../assets/about-illustration.png");
   background-size: cover;
+  margin-bottom: 20px;
+}
+
+#text {
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin: 0 30px 50px 30px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--color-bg-button);
 }
 
 </style>
