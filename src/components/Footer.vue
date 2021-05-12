@@ -27,6 +27,7 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: var(--color-bg-secondary);
+  border-top: 2px solid rgba(0,0,0,0.1);
 }
 
 li {
