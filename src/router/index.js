@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Login from "@/views/Login"
-import firebase from 'firebase'
+// import firebase from 'firebase'
 
 Vue.use(VueRouter)
 
@@ -55,6 +55,7 @@ const router = new VueRouter({
   routes
 });
 
+/*
 router.beforeEach((to, from, next)  => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   if(requiresAuth) {
@@ -85,6 +86,7 @@ router.beforeEach((to, from, next)  => {
     next();
   }
 });
+*/
 
 export default router
 

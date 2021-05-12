@@ -3,30 +3,26 @@
     <ul>
       <li v-for="(question,index) in questions"
           v-bind:key="question.questionId"
-
           class="question_grid">
-
         <div v-show="index === questionIndex">
-
-        <h1>{{question.questionTitle}}</h1>
-        <h2>{{question.question}}</h2>
-
-        <form class="radio_button_grid">
-
-          <input type="radio" id="one" v-bind:value="question.answerOne" v-model="picked">
-          <label for="one">{{question.answerOne}}</label>
-
-          <input type="radio" id="two" v-bind:value="question.answerTwo" v-model="picked">
-          <label for="two">{{question.answerTwo}}</label>
-
-          <input type="radio" id="three" v-bind:value="question.answerThree" v-model="picked">
-          <label for="three">{{question.answerThree}}</label>
-
-          <span >Your Answer is: {{ picked }} </span>
-
-        </form>
+          <h1>{{question.questionTitle}}</h1>
+          <h2>{{question.question}}</h2>
+          <form class="radio_button_grid">
+            <p>
+              <input type="radio" id="one" v-bind:value="question.answerOne" v-model="picked">
+              <label for="one"> {{question.answerOne}}</label>
+            </p>
+            <p>
+              <input type="radio" id="two" v-bind:value="question.answerTwo" v-model="picked">
+              <label for="two"> {{question.answerTwo}}</label>
+            </p>
+            <p>
+              <input type="radio" id="three" v-bind:value="question.answerThree" v-model="picked">
+              <label for="three"> {{question.answerThree}}</label>
+            </p>
+            <span >Your Answer is: {{ picked }} </span>
+          </form>
         </div>
-
       </li>
       <div v-show="questionIndex === questions.length">
         <h2>
@@ -35,39 +31,30 @@
         <p>
           Total score: {{ points }} / {{ questions.length }}
         </p>
-
         <ul>
           <li v-for="list in scoreList"
-          v-bind:key="list.id">
+              v-bind:key="list.id">
             <p>{{list.id+1}}</p>
             <p>{{list.title}}</p>
-
             <p>{{list.correct}}</p>
-
           </li>
 
-
           <router-link to="/" tag="button" class="start_btn">Back to home</router-link>
-
           <router-view> </router-view>
-
           <button @click="tryAgain"> Try Again!</button>
-
         </ul>
-
       </div>
     </ul>
     <button v-if="questionIndex > 0 && questionIndex < questions.length" v-on:click="prev">
-      prev
+      <font-awesome-icon :icon="['fas', 'arrow-left']" />
     </button>
-
     <button v-show="questionIndex < questions.length" v-on:click="next">
-      next
+      <font-awesome-icon :icon="['fas', 'arrow-right']" />
     </button>
-
-<!--    -->
+    <!--    -->
   </div>
 </template>
+
 <script>
 export default {
   name: "QuizData",
@@ -143,40 +130,49 @@ export default {
 }
 </script>
 <style scoped>
+
+
 h1{
   font-size: 48px;
   text-decoration: underline;
   margin-top: 75px;
+  margin-left: 60px;
 }
 h2 {
   font-size: 36px;
-  border-bottom: 2px solid;
   margin-left: 175px;
   margin-right: 175px;
-  padding: 25px;
+  padding: 20px;
 }
 li{
   font-family: 'Roboto', sans-serif;
   font-size: 28px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 label {
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 .question_grid {
   display: grid;
   grid-template-columns: 1fr;
 }
 .radio_button_grid {
-  margin: 25px;
+  text-align: left;
+  margin-left: 60px;
+  margin-right: 60px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 2px solid #000000;
+  padding: 20px;
 }
-#button_submit {
+button {
   width: fit-content;
   height: fit-content;
   font-size: 28px;
-  margin: 25px;
-  border-radius: 5px;
+  margin: 10px;
+  margin-left: 60px;
+  border-radius: 8px;
+  padding: 10px;
 }
 </style>
