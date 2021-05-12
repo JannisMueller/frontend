@@ -15,11 +15,13 @@
           {{ link.name}}
         </router-link>
       </li>
-      <li v-if="user" @click="toggleNavbar">
-        <a @click="logout">Log Out</a>
+      <li @click="toggleNavbar">
+        <a v-if="user" @click="logout">Log Out</a>
+        <router-link v-else to="/login">Log In</router-link>
       </li>
-      <li v-else @click="toggleNavbar" >
-        <router-link to="/login">Log In</router-link>
+      <li @click="toggleTheme">
+        <font-awesome-icon class="moon_btn" :icon="['fas', 'moon']" size="lg" v-if="!darkMode" />
+        <font-awesome-icon class="sun_btn" :icon="['fas', 'sun']" size="lg" v-else />
       </li>
     </ul>
     <font-awesome-icon class="toggle_btn" :icon="['fas', 'bars']" size="2x" @click="toggleNavbar" />
@@ -59,6 +61,12 @@ export default {
         this.$router.push('/login').catch(() => {});
         // https://stackoverflow.com/questions/62462276/how-to-solve-avoided-redundant-navigation-to-current-location-error-in-vue
       });
+    },
+    toggleTheme() {
+      const bodyEl = document.querySelector('body');
+      bodyEl.classList.toggle('dark');
+      this.darkMode = !this.darkMode;
+      // TODO: localstorage
     }
   }
 }

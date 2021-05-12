@@ -41,8 +41,17 @@ export default {
   font-family: 'Roboto', sans-serif;
 }
 
+:root {
+  /*Add colors with css variables (light-mode)*/
+}
+
+.dark {
+  /*Add colors with css variables (dark-mode)*/
+}
+
 html {
   height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {

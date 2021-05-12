@@ -1,6 +1,6 @@
 <template>
   <div class="signup">
-    <form @submit.prevent="signUp">
+    <form @submit.prevent="signup">
       <h2>Create Account</h2>
       <input type="email" placeholder="Email" v-model="email">
       <input type="password" placeholder="Password" v-model="password">
@@ -22,7 +22,7 @@ export default {
     }
   },
   methods: {
-    signUp() {
+    signup() {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
         this.$router.push('/quiz').catch(() => {});
       });
