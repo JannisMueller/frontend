@@ -38,6 +38,7 @@ export default {
     return {
       isActive: false,
       user: null,
+      darkMode: false
     }
   },
   created() {
