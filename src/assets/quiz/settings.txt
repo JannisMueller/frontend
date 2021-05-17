@@ -12,6 +12,8 @@ size => låt linjen vara i höjd med "k"
                                    ^
 line height => till "g"
                       ^
+Export => size = 1x
+          PNG
 
 
 
