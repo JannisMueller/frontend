@@ -28,20 +28,28 @@
         </div>
       </div>
       <div v-show="questionIndex === questions.length">
-        <div v-if="points < 2">
-          <p class="result_img">&#128578;</p>
-          <p class="result_message">Not bad!</p>
+        <div v-if="points === 0">
+          <p class="result_img">&#128533;</p>
+          <p class="result_message">Did you even try?</p>
         </div>
-        <div v-else>
+        <div v-else-if="points === 3">
           <p class="result_img">&#127942;</p>
           <p class="result_message">Congrats!</p>
+        </div>
+        <div v-else>
+          <p class="result_img">&#128578;</p>
+          <p class="result_message">Not bad!</p>
         </div>
         <p id="score">Total score: {{ points }}/{{ questions.length }}</p>
         <ul>
           <li v-for="score in scoreList"
               :key="score.id"
           >
-            {{ score.title }} {{ score.correct }}
+            {{ score.title }}
+            <span v-if="score.correct">✔️</span>
+            <span v-else>❌</span>
+<!--            <font-awesome-icon v-if="score.correct" :icon="['fas', 'check']" />-->
+<!--            <font-awesome-icon v-else :icon="['fas', 'times']" />-->
           </li>
         </ul>
         <router-link to="/" tag="button" class="navigateToHome_btn" @click="resetScoreList">Go Back</router-link>
@@ -53,6 +61,7 @@
 <script>
 export default {
   name: "QuizData",
+
   data() {
     return {
       questions: [],
@@ -60,9 +69,10 @@ export default {
       picked: [],
       points: 0,
       scoreList: [],
-      isCorrect: ''
+      isCorrect: false
     }
   },
+
   methods: {
     tryAgain() {
       this.questionIndex = 0
@@ -70,29 +80,33 @@ export default {
       this.points = 0
       this.scoreList = []
     },
+
     getImage(image) {
       return require('@/assets/quiz/' + image);
     },
+
     next() {
       if (this.picked[this.questionIndex] === undefined) {
         alert('Please choose an answer!');
         return;
       }
       this.questionIndex++;
+
       if (this.picked[this.questionIndex-1] === this.questions[this.questionIndex-1].correctAnswer) {
         this.points++;
-        this.isCorrect = 'C'
+        this.isCorrect = true;
         console.log("Correct answer : " + this.points);
       } else {
-        this.isCorrect = 'W';
+        this.isCorrect = false;
         console.log("Wrong answer : " + this.points);
       }
       this.checkScore();
-      // const correctAnswers = [...new Set(this.questions.map(correct => correct.correctAnswer))];
     },
+
     resetScoreList() {
-      return this.scoreList = null
+      return this.scoreList = [];
     },
+
     checkScore() {
       // Hantera: när användaren trycker på "<=" - problem: duplicate keys
       let answer = {
@@ -102,9 +116,11 @@ export default {
       };
       return this.scoreList.push(answer);
     },
+
     prev() {
       this.questionIndex--;
     }
+
   },
   mounted(){
     fetch('http://localhost:3000/api/question/')
@@ -195,7 +211,7 @@ label {
   margin-left: 15px;
   color: var(--color-text-secondary);
 }
-.prev_btn, .next_btn, .navigateToHome_btn, .restart_btn {
+.prev_btn, .next_btn {
   padding: 10px 20px;
   border: 0;
   border-radius: 5px;
@@ -205,10 +221,6 @@ label {
   font-weight: bold;
   margin-bottom: 20px;
   cursor: pointer;
-}
-.restart_btn {
-  margin-left: 30px;
-  background-color: var(--color-bg-button);
 }
 .prev_btn {
   transition: background-color 500ms ease-in-out;
@@ -223,6 +235,27 @@ label {
 }
 .prev_btn:focus, .next_btn:focus {
   outline: 0;
+}
+.navigateToHome_btn, .restart_btn {
+  width: 110px;
+  padding: 10px 0;
+  border: 0;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--color-text-button);
+  letter-spacing: 2px;
+}
+.navigateToHome_btn:focus, .restart_btn:focus {
+  outline: 0;
+}
+.navigateToHome_btn {
+  background-color: var(--color-text-secondary);
+}
+.restart_btn {
+  margin-left: 30px;
+  background-color: var(--color-bg-button);
 }
 .result_img {
   margin: 70px 0 50px 0;
@@ -247,11 +280,15 @@ label {
 }
 ul {
   margin-bottom: 30px;
+  margin-left: 70px;
 }
 li {
   font-size: 18px;
   color: var(--color-text-primary);
   list-style-type: none;
-  margin-bottom: 5px;
 }
+li:not(:last-of-type) {
+  margin-bottom: 10px;
+}
+
 </style>

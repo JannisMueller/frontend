@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 h2 {
-  margin: 30px 0 50px 0;
+  margin: 70px 0 110px 0;
   font-weight: bold;
   color: var(--color-text-primary);
 }
@@ -51,20 +51,16 @@ input {
   color: var(--color-text-secondary);
   border-radius: 5px;
   border: 2px solid var(--color-text-secondary);
-  padding-left: 10px
-}
-input:first-of-type {
+  padding-left: 10px;
   margin-bottom: 20px;
-}
-input:last-of-type {
-  margin-bottom: 50px;
+
 }
 input:focus {
   outline: none;
 }
 p {
   width: 400px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   color: var(--color-text-secondary);
 }
 .signup_btn {

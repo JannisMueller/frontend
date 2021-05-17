@@ -44,13 +44,19 @@ figure {
 .start_btn {
   font-weight: bold;
   font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   padding: 20px 40px;
   border: 0;
-  border-radius: 10px;
   cursor: pointer;
   color: var(--color-text-button);
   background-color: var(--color-bg-button);
+  border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+}
+
+.start_btn:hover {
+  transform: scale(1.1);
 }
 
 .dark .start_btn {
@@ -58,7 +64,7 @@ figure {
 }
 
 .start_btn:focus {
-  outline: none;
+  outline: 0;
 }
 
 </style>

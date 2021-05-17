@@ -64,8 +64,6 @@ html {
   --color-text-button: #181818;
 }
 
-/*#4DE4B4*/
-
 body {
   position: relative;
   min-height: 100%;
