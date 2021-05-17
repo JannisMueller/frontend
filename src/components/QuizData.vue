@@ -1,121 +1,110 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="(question,index) in questions"
-          v-bind:key="question.questionId"
-          class="question_grid">
+  <div class="question_flex">
+    <div class="questions">
+      <div
+          v-for="(question, index) in questions"
+          :key="question.questionId"
+      >
         <div v-show="index === questionIndex">
-          <h1>{{question.questionTitle}}</h1>
-          <h2>{{question.question}}</h2>
-          <form class="radio_button_grid">
-            <p>
-              <input type="radio" id="one" v-bind:value="question.answerOne" v-model="picked">
-              <label for="one"> {{question.answerOne}}</label>
-            </p>
-            <p>
-              <input type="radio" id="two" v-bind:value="question.answerTwo" v-model="picked">
-              <label for="two"> {{question.answerTwo}}</label>
-            </p>
-            <p>
-              <input type="radio" id="three" v-bind:value="question.answerThree" v-model="picked">
-              <label for="three"> {{question.answerThree}}</label>
-            </p>
-            <span >Your Answer is: {{ picked }} </span>
-          </form>
+          <h2 class="question_title"> {{ question.questionTitle }}/{{ questions.length }} </h2>
+          <h3 class="question"> {{question.question}} </h3>
+          <figure>
+            <img :src="getImage(question.questionImg)" alt="code">
+          </figure>
+          <div class="alt_answers">
+            <input type="radio" id="one" :value="question.answerOne" v-model="picked[questionIndex]" >
+            <label for="one" >{{ question.answerOne }}</label>
+          </div>
+          <div class="alt_answers">
+            <input type="radio" id="two" :value="question.answerTwo" v-model="picked[questionIndex]" >
+            <label for="two" >{{ question.answerTwo }}</label>
+          </div>
+          <div class="alt_answers">
+            <input type="radio" id="three" :value="question.answerThree" v-model="picked[questionIndex]" >
+            <label for="three" >{{ question.answerThree }}</label>
+          </div>
+          <button class="prev_btn" v-if="questionIndex > 0" @click="prev">Back</button>
+          <button class="next_btn" @click="next">Next</button>
         </div>
-      </li>
-      <div v-show="questionIndex === questions.length">
-        <h2>
-          Quiz finished
-        </h2>
-        <p>
-          Total score: {{ points }} / {{ questions.length }}
-        </p>
-        <ul>
-          <li v-for="list in scoreList"
-              v-bind:key="list.id">
-            <p>{{list.id+1}}</p>
-            <p>{{list.title}}</p>
-            <p>{{list.correct}}</p>
-          </li>
-
-          <router-link to="/" tag="button" class="start_btn">Back to home</router-link>
-          <router-view> </router-view>
-          <button @click="tryAgain"> Try Again!</button>
-        </ul>
       </div>
-    </ul>
-    <button v-if="questionIndex > 0 && questionIndex < questions.length" v-on:click="prev">
-      <font-awesome-icon :icon="['fas', 'arrow-left']" />
-    </button>
-    <button v-show="questionIndex < questions.length" v-on:click="next">
-      <font-awesome-icon :icon="['fas', 'arrow-right']" />
-    </button>
-    <!--    -->
+      <div v-show="questionIndex === questions.length">
+        <div v-if="points < 2">
+          <p class="result_img">&#128578;</p>
+          <p class="result_message">Not bad!</p>
+        </div>
+        <div v-else>
+          <p class="result_img">&#127942;</p>
+          <p class="result_message">Congrats!</p>
+        </div>
+        <p id="score">Total score: {{ points }}/{{ questions.length }}</p>
+        <ul>
+          <li v-for="score in scoreList"
+              :key="score.id"
+          >
+            {{ score.title }} {{ score.correct }}
+          </li>
+        </ul>
+        <router-link to="/" tag="button" class="navigateToHome_btn" @click="resetScoreList">Go Back</router-link>
+        <button class="restart_btn" @click="tryAgain">Try Again!</button>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
 export default {
   name: "QuizData",
-
-  data: function () {
+  data() {
     return {
       questions: [],
       questionIndex: 0,
-      picked:'',
+      picked: [],
       points: 0,
-      isCorrect: "wrong answer",
-      scoreList: []
-
+      scoreList: [],
+      isCorrect: ''
     }
   },
   methods: {
-
-    tryAgain: function () {
-
-          this.questionIndex= 0,
-          this.picked='',
-          this.points= 0,
-          this.isCorrect= "wrong answer",
-          this.scoreList= []
-
+    tryAgain() {
+      this.questionIndex = 0
+      this.picked = []
+      this.points = 0
+      this.scoreList = []
     },
-
-    checkScore: function () {
-      let x = {
+    getImage(image) {
+      return require('@/assets/quiz/' + image);
+    },
+    next() {
+      if (this.picked[this.questionIndex] === undefined) {
+        alert('Please choose an answer!');
+        return;
+      }
+      this.questionIndex++;
+      if (this.picked[this.questionIndex-1] === this.questions[this.questionIndex-1].correctAnswer) {
+        this.points++;
+        this.isCorrect = 'C'
+        console.log("Correct answer : " + this.points);
+      } else {
+        this.isCorrect = 'W';
+        console.log("Wrong answer : " + this.points);
+      }
+      this.checkScore();
+      // const correctAnswers = [...new Set(this.questions.map(correct => correct.correctAnswer))];
+    },
+    resetScoreList() {
+      return this.scoreList = null
+    },
+    checkScore() {
+      // Hantera: när användaren trycker på "<=" - problem: duplicate keys
+      let answer = {
         id: this.questionIndex-1,
         title: this.questions[this.questionIndex-1].questionTitle,
         correct: this.isCorrect
-      }
-      console.log("x: " + x)
-      return this.scoreList.push(x);
-
+      };
+      return this.scoreList.push(answer);
     },
-
-    next: function() {
-      this.questionIndex++;
-
-      let correct = (this.questions[this.questionIndex-1].correctAnswer).toString();
-      if(this.picked === correct){
-        this.points++;
-        this.isCorrect= "correct answer";
-        console.log("inloop")
-      }
-      this.checkScore();
-      console.log("question Index: " + this.questionIndex)
-      console.log("picked: " + this.picked)
-      console.log("points: " + this.points)
-      console.log("correct Answer: " + this.questions[this.questionIndex-1].correctAnswer)
-      console.log ("correct: "  + correct)
-      this.picked='';
-      this.isCorrect= "wrong answer";
-
-    },
-    prev: function() {
+    prev() {
       this.questionIndex--;
-    },
-
+    }
   },
   mounted(){
     fetch('http://localhost:3000/api/question/')
@@ -130,49 +119,139 @@ export default {
 }
 </script>
 <style scoped>
-
-
-h1{
-  font-size: 48px;
-  text-decoration: underline;
-  margin-top: 75px;
-  margin-left: 60px;
+.question_flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-h2 {
-  font-size: 36px;
-  margin-left: 175px;
-  margin-right: 175px;
-  padding: 20px;
+.questions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  min-height: 100%;
 }
-li{
-  font-family: 'Roboto', sans-serif;
+.question_title {
+  color: var(--color-bg-button);
+  font-weight: bold;
   font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.question {
+  margin-bottom: 18px;
+  color: var(--color-text-primary);
+  font-weight: normal;
+  font-size: 20px;
+}
+.alt_answers {
+  width: 400px;
+  padding: 15px 0 15px 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 3px solid var(--color-bg-button);
+}
+figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
   margin-bottom: 20px;
+  border: 3px solid var(--color-text-secondary);
+  border-radius: 5px;
+  background-color: var(--color-bg-secondary);
+}
+input {
+  appearance: none;
+  border: 2px solid var(--color-bg-button);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  vertical-align: bottom;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+input:checked::after {
+  display: block;
+}
+input:checked ~ label {
+  color: var(--color-bg-button);
+  font-weight: bold;
+}
+input::after {
+  content: '';
+  display: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--color-bg-button);
 }
 label {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  font-size: 18px;
+  margin-left: 15px;
+  color: var(--color-text-secondary);
 }
-.question_grid {
-  display: grid;
-  grid-template-columns: 1fr;
+.prev_btn, .next_btn, .navigateToHome_btn, .restart_btn {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 5px;
+  background-color: var(--color-text-secondary);
+  color: var(--color-text-button);
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
-.radio_button_grid {
-  text-align: left;
-  margin-left: 60px;
-  margin-right: 60px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border: 2px solid #000000;
-  padding: 20px;
+.restart_btn {
+  margin-left: 30px;
+  background-color: var(--color-bg-button);
 }
-button {
-  width: fit-content;
-  height: fit-content;
+.prev_btn {
+  transition: background-color 500ms ease-in-out;
+  float: left;
+}
+.next_btn {
+  transition: background-color 500ms ease-in-out;
+  float: right;
+}
+.prev_btn:hover, .next_btn:hover {
+  background-color: var(--color-bg-button);
+}
+.prev_btn:focus, .next_btn:focus {
+  outline: 0;
+}
+.result_img {
+  margin: 70px 0 50px 0;
+  font-size: 100px;
+  text-align: center;
+}
+.result_message {
   font-size: 28px;
-  margin: 10px;
-  margin-left: 60px;
-  border-radius: 8px;
-  padding: 10px;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+#score {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+}
+ul {
+  margin-bottom: 30px;
+}
+li {
+  font-size: 18px;
+  color: var(--color-text-primary);
+  list-style-type: none;
+  margin-bottom: 5px;
 }
 </style>
