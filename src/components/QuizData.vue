@@ -52,8 +52,8 @@
 <!--            <font-awesome-icon v-else :icon="['fas', 'times']" />-->
           </li>
         </ul>
-        <router-link to="/" tag="button" class="navigateToHome_btn" @click="resetScoreList">Go Back</router-link>
-        <button class="restart_btn" @click="tryAgain">Try Again!</button>
+        <router-link to="/" tag="button" class="navigateToHome_btn" @click="resetScoreList">Home</router-link>
+        <button class="restart_btn" @click="tryAgain">Restart</button>
       </div>
     </div>
   </div>
