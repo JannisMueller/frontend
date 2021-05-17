@@ -1,0 +1,17 @@
+https://carbon.now.sh
+
+Tema => Seti
+Språk => Java
+bakgrund => ingen (transparent)
+padding => default
+drop shadow => nej
+Auto-adjust width => nej
+width => 400
+font => default "Hack"
+size => låt linjen vara i höjd med "k"
+                                   ^
+line height => till "g"
+                      ^
+
+
+
