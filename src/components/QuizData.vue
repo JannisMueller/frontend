@@ -3,11 +3,10 @@
     <div class="questions">
       <div
           v-for="(question, index) in questions"
-          :key="question.questionId"
-      >
+          :key="question.questionId">
         <div v-show="index === questionIndex">
           <h2 class="question_title"> {{ question.questionTitle }}/{{ questions.length }} </h2>
-          <h3 class="question"> {{question.question}} </h3>
+          <h3 class="question"> {{ question.question }} </h3>
           <figure>
             <img :src="getImage(question.questionImg)" alt="code">
           </figure>
@@ -24,7 +23,8 @@
             <label for="three" >{{ question.answerThree }}</label>
           </div>
           <button class="prev_btn" v-if="questionIndex > 0" @click="prev">Back</button>
-          <button class="next_btn" @click="next">Next</button>
+          <button class="next_btn" v-if="questionIndex < questions.length-1" @click="next">Next</button>
+          <button class="next_btn" v-if="questionIndex == questions.length-1" @click="saveToHighScore">Next</button>
         </div>
       </div>
       <div v-show="questionIndex === questions.length">
@@ -61,6 +61,7 @@
 <script>
 import firebase from 'firebase'
 import db from '@/firebaseInit'
+import axios from 'axios'
 
 export default {
 
@@ -76,6 +77,16 @@ export default {
     }
   },
   methods: {
+  saveToHighScore() {
+    this.next();
+          let higScore = {
+            score: this.points,
+            name: this.UserName,
+          }
+          axios.post('http://localhost:3000/api/highscore/', higScore)
+              .catch(err => console.log(err.message));
+
+    },
     tryAgain() {
       this.saveScore();
 
@@ -117,6 +128,7 @@ export default {
 
     prev() {
       this.questionIndex--;
+      this.scoreList.splice(this.questionIndex,1)
     },
 
     saveScore() {

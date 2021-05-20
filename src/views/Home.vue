@@ -5,12 +5,19 @@
     <figure></figure>
     <router-link to="/login" tag="button" class="start_btn">Start Quiz</router-link>
     <router-view></router-view>
+
+    <highscore-list></highscore-list>
+    <LastPlayedQuiz></LastPlayedQuiz>
+
   </div>
 </template>
 
 <script>
+import HighscoreList from "@/components/HighscoreList";
+import LastPlayedQuiz from "@/components/LastPlayedQuiz";
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {LastPlayedQuiz, HighscoreList}
 }
 </script>
 
