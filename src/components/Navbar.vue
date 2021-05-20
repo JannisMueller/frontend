@@ -4,6 +4,10 @@
     <ul
         :class="{ active: isActive }"
     >
+      <li @click="toggleNavbar">
+        <router-link v-if="user" to="/profile">Profile</router-link>
+        <router-link v-else to="/">Home</router-link>
+      </li>
       <li
           v-for="(link, index) in links"
           :key="index"

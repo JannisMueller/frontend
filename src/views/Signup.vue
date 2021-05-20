@@ -2,8 +2,9 @@
   <div class="signup">
     <form @submit.prevent="signup">
       <h2>Create Account</h2>
-      <input type="email" placeholder="Email" v-model="email">
-      <input type="password" placeholder="Password" v-model="password">
+      <input type="text" placeholder="Username" v-model="user.username">
+      <input type="email" placeholder="Email" v-model="user.email">
+      <input type="password" placeholder="Password" v-model="user.password">
       <p>By creating an account, you agree to our Terms of Use and Privacy Policy.</p>
       <button class="signup_btn">Sign Up</button>
     </form>
@@ -12,19 +13,37 @@
 
 <script>
 import firebase from 'firebase'
+import db from '@/firebaseInit'
 
 export default {
   name: 'SignUp',
   data() {
     return {
-      email: '',
-      password: ''
+      user: {
+        username: '',
+        email: '',
+        password: ''
+      }
     }
   },
   methods: {
     signup() {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
-        this.$router.push('/quiz').catch(() => {});
+      firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
+          .then(() => {
+            firebase.auth().currentUser.updateProfile({
+              displayName: this.user.username
+            }).then(() => {
+              db.collection("users").doc(firebase.auth().currentUser.uid).set({
+                username: this.user.username,
+                email: this.user.email
+              }).then(() => {
+                this.$router.push('/profile').catch(() => {});
+              });
+            }).catch((err) => {
+              alert(err.message);
+            });
+          }).catch((err) => {
+        alert(err.message);
       });
     }
   }
@@ -33,7 +52,7 @@ export default {
 
 <style scoped>
 h2 {
-  margin: 70px 0 110px 0;
+  margin: 70px 0 70px 0;
   font-weight: bold;
   color: var(--color-text-primary);
 }

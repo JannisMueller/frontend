@@ -46,6 +46,14 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: () => import('@/views/Signup.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/views/Profile.vue'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
@@ -66,10 +74,18 @@ router.beforeEach((to, from, next)  => {
         next();
       }
     });
+  } else if(!requiresAuth && to.path === '/') {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        next('/profile');
+      } else {
+        next();
+      }
+    });
   } else if(!requiresAuth && to.path === '/login') {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        next('/quiz');
+        next('/profile');
       } else {
         next();
       }
@@ -77,7 +93,7 @@ router.beforeEach((to, from, next)  => {
   } else if(!requiresAuth && to.path === '/signup') {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        next('/quiz');
+        next('/profile');
       } else {
         next();
       }

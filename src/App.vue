@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       navLinks: [
-        {name: 'Home', path: '/'},
+        // {name: 'Home', path: '/'},
         {name: 'About', path: '/about'},
         {name: 'Learn', path: '/learn'},
         {name: 'Quiz', path: '/quiz'},

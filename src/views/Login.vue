@@ -2,11 +2,11 @@
   <div class="login">
     <form @submit.prevent="login">
       <h2>Welcome Back!</h2>
-      <input type="email" placeholder="Email" v-model="email">
-      <input type="password" placeholder="Password" v-model="password">
+      <input type="email" placeholder="Email" v-model="user.email">
+      <input type="password" placeholder="Password" v-model="user.password">
       <button class="login_btn">Log in</button>
       <p>New to Java Journey? <router-link to="/signup">Sign Up</router-link></p>
-      <router-link class="close_btn" to="/">&times;</router-link>
+      <a class="close_btn" @click="close">&times;</a>
     </form>
   </div>
 </template>
@@ -18,15 +18,24 @@ export default {
   name: 'Login',
   data() {
     return {
-      email: '',
-      password: ''
+      user: {
+        email: '',
+        password: ''
+      }
     }
   },
   methods: {
     login() {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-        this.$router.push('/quiz').catch(() => {});
-      });
+      firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
+          .then(() => {
+            this.$router.push('/profile').catch(() => {});
+          })
+          .catch((err) => {
+            alert(err.message)
+          });
+    },
+    close() {
+      this.$router.push('/');
     }
   }
 }
