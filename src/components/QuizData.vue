@@ -117,7 +117,6 @@ export default {
 
     },
     checkScore() {
-      // Hantera: när användaren trycker på "<=" - problem: duplicate keys
       let answer = {
         id: this.questionIndex-1,
         title: this.questions[this.questionIndex-1].questionTitle,
