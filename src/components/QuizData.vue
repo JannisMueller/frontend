@@ -23,8 +23,9 @@
             <label for="three" >{{ question.answerThree }}</label>
           </div>
           <button class="prev_btn" v-if="questionIndex > 0" @click="prev">Back</button>
-          <button class="next_btn" v-if="questionIndex < questions.length-1" @click="next">Next</button>
-          <button class="next_btn" v-if="questionIndex == questions.length-1" @click="saveToHighScore">Next</button>
+          <button class="next_btn" @click="next">Next</button>
+<!--          <button class="next_btn" v-if="questionIndex < questions.length-1" @click="next">Next</button>-->
+<!--          <button class="next_btn" v-if="questionIndex == questions.length-1" @click="saveToHighScore">Next</button>-->
         </div>
       </div>
       <div v-show="questionIndex === questions.length">
@@ -62,9 +63,7 @@
 import firebase from 'firebase'
 import db from '@/firebaseInit'
 import axios from 'axios'
-
 export default {
-
   name: "QuizData",
   data() {
     return {
@@ -73,23 +72,27 @@ export default {
       picked: [],
       points: 0,
       scoreList: [],
-      isCorrect: false
+      isCorrect: false,
+      username: ''
+    }
+  },
+  created() {
+    const user = firebase.auth().currentUser;
+
+    if (user != null) {
+      this.username = user.displayName;
     }
   },
   methods: {
-  saveToHighScore() {
-    this.next();
-          let higScore = {
-            score: this.points,
-            name: this.UserName,
-          }
-          axios.post('http://localhost:3000/api/highscore/', higScore)
-              .catch(err => console.log(err.message));
-
+    saveToHighScore() {
+      let higScore = {
+        score: this.points,
+        name: this.username,
+      }
+      axios.post('http://localhost:3000/api/highscore/', higScore)
+          .catch(err => console.log(err.message));
     },
     tryAgain() {
-      this.saveScore();
-
       this.questionIndex = 0
       this.picked = []
       this.points = 0
@@ -104,7 +107,6 @@ export default {
         return;
       }
       this.questionIndex++;
-
       if (this.picked[this.questionIndex-1] === this.questions[this.questionIndex-1].correctAnswer) {
         this.points++;
         this.isCorrect = true;
@@ -115,6 +117,10 @@ export default {
       }
       this.checkScore();
 
+      if (this.questionIndex === this.questions.length) {
+        this.saveScore();
+        this.saveToHighScore();
+      }
     },
     checkScore() {
       let answer = {
@@ -124,12 +130,10 @@ export default {
       };
       return this.scoreList.push(answer);
     },
-
     prev() {
       this.questionIndex--;
-      this.scoreList.splice(this.questionIndex,1)
+      this.scoreList.splice(this.questionIndex,1);
     },
-
     saveScore() {
       db
           .collection("users")
@@ -140,7 +144,6 @@ export default {
             date: new Date().toDateString()
           });
     }
-
   },
   mounted(){
     fetch('http://localhost:3000/api/question/')
@@ -254,7 +257,6 @@ label {
   padding: 10px 0;
   color: var(--color-text-button);
   letter-spacing: 2px;
-
 }
 .restart_btn:focus {
   outline: 0;
@@ -309,5 +311,4 @@ li {
 li:not(:last-of-type) {
   margin-bottom: 10px;
 }
-
 </style>
