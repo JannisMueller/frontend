@@ -2,17 +2,23 @@
   <div class="profile">
     <h2>Hello {{ username }}!</h2>
     <ScoreList />
+    <HighscoreList />
+    <LastPlayedQuiz />
   </div>
 </template>
 
 <script>
 import ScoreList from '@/components/ScoreList'
 import firebase from 'firebase'
+import HighscoreList from "@/components/HighscoreList";
+import LastPlayedQuiz from "@/components/LastPlayedQuiz";
 
 export default {
   name: "Profile",
   components: {
-    ScoreList
+    ScoreList,
+    LastPlayedQuiz,
+    HighscoreList
   },
   data() {
     return {

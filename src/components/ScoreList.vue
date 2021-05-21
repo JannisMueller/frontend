@@ -24,7 +24,7 @@ export default {
   },
   created() {
     db.collection('users').doc(firebase.auth().currentUser.uid)
-    .collection('scores').orderBy("score", "desc").get()
+    .collection('scores').orderBy("score", "desc").limit(5).get()
     .then(snapshot => {
       snapshot.forEach(doc => {
         let score = doc.data()
