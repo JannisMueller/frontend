@@ -6,7 +6,42 @@
   },
   {
     "referenceId": 2,
-    "referenceName": "Javatpoint - The Best Portal to Learn Technologies",
+    "referenceName": "Javatpoint",
     "referenceURL": "https://www.javatpoint.com/java-tutorial"
+  },
+  {
+    "referenceId": 3,
+    "referenceName": "W3Schools",
+    "referenceURL": "https://www.w3schools.com/java/"
+  },
+  {
+    "referenceId": 4,
+    "referenceName": "Tutorialspoint",
+    "referenceURL": "https://www.tutorialspoint.com/java/index.htm"
+  },
+  {
+    "referenceId": 5,
+    "referenceName": "Oracle Academy",
+    "referenceURL": "https://academy.oracle.com/en/oa-web-overview.html"
+  },
+  {
+    "referenceId": 6,
+    "referenceName": "Codecademy",
+    "referenceURL": "https://www.codecademy.com/learn/learn-java"
+  },
+  {
+    "referenceId": 7,
+    "referenceName": "Tech With Tim - Java Tutorial for Beginners / YouTube",
+    "referenceURL": "https://youtu.be/P8FmdbRxX34"
+  },
+  {
+    "referenceId": 8,
+    "referenceName": "Programming with Mosh - Java Tutorial for Beginners / YouTube",
+    "referenceURL": "https://youtu.be/eIrMbAQSU34"
+  },
+  {
+    "referenceId": 9,
+    "referenceName": "Amigoscode - Java Full Course / YouTube",
+    "referenceURL": "https://youtu.be/Qgl81fPcLc8"
   }
 ]

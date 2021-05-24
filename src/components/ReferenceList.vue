@@ -1,15 +1,16 @@
 <template>
   <div class="reference_flex">
     <h2>References</h2>
-    <button @click="toggleReferences" >Get References</button>
+    <figure></figure>
     <ul
+        id="text"
         :class="{ active: isActive }"
     >
       <li
           v-for="referenceData in referenceDataList"
           :key="referenceData.referenceId"
       >
-        {{ referenceData.referenceName }}
+        {{ referenceData.referenceName }}<br>
         <a :href="referenceData.referenceURL" target="_blank">{{ referenceData.referenceURL }}</a>
       </li>
     </ul>
@@ -24,13 +25,7 @@ export default {
   data() {
     return {
       referenceDataList: referenceList,
-      isActive: false
-    }
-  },
-
-  methods: {
-    toggleReferences() {
-      this.isActive = !this.isActive;
+      isActive: true
     }
   }
 }
@@ -43,30 +38,10 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 h2 {
   margin: 30px 0 30px 0;
   color: var(--color-text-primary);
 }
-
-button {
-  padding: 20px;
-  border: 0;
-  border-radius: 10px;
-  color: var(--color-text-button);
-  background-color: var(--color-bg-button);
-  font-size: 18px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 50px;
-  cursor: pointer;
-  transition: background-color 500ms ease-in-out;
-}
-
-button:hover {
-  background-color: var(--color-text-secondary);
-}
-
 ul {
   display: none;
 }
@@ -82,5 +57,17 @@ li {
 a {
   color: var(--color-bg-button);
 }
-
+#text {
+  max-width: 700px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 50px;
+}
+figure {
+  width: 375px;
+  height: 250px;
+  background-image: url("../assets/reference-illustration.jpg");
+  background-size: cover;
+  margin-bottom: 30px;
+}
 </style>
