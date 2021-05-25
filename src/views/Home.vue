@@ -5,19 +5,12 @@
     <figure></figure>
     <router-link to="/login" tag="button" class="start_btn">Start Quiz</router-link>
     <router-view></router-view>
-
-<!--    <highscore-list></highscore-list>-->
-<!--    <LastPlayedQuiz></LastPlayedQuiz>-->
-
   </div>
 </template>
 
 <script>
-// import HighscoreList from "@/components/HighscoreList";
-// import LastPlayedQuiz from "@/components/LastPlayedQuiz";
 export default {
   name: 'Home'
-  // components: {LastPlayedQuiz, HighscoreList}
 }
 </script>
 
@@ -30,7 +23,8 @@ export default {
 }
 
 h2 {
-  margin: 30px 0 10px 0;
+  margin: 50px 0 10px 0;
+  font-weight: bold;
   color: var(--color-text-primary);
 }
 
@@ -38,11 +32,12 @@ p {
   margin-bottom: 30px;
   color: var(--color-text-secondary);
   font-weight: bold;
+  font-size: 18px;
 }
 
 figure {
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   background-image: url("../assets/landing-page.png");
   background-size: cover;
   margin-bottom: 30px;

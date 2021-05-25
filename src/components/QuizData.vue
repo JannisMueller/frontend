@@ -86,8 +86,9 @@ export default {
   methods: {
     saveToHighScore() {
       let higScore = {
-        score: this.points,
+        score: this.points.toString(),
         name: this.username,
+        date: new Date().toISOString().slice(0, 10)
       }
       axios.post('http://localhost:3000/api/highscore/', higScore)
           .catch(err => console.log(err.message));
@@ -141,7 +142,7 @@ export default {
           .collection("scores")
           .add({
             score: this.points,
-            date: new Date().toDateString()
+            date: new Date().toISOString().slice(0, 10)
           });
     }
   },

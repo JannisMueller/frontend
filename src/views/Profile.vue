@@ -1,24 +1,26 @@
 <template>
   <div class="profile">
-    <h2>Hello {{ username }}!</h2>
-    <ScoreList />
-    <HighscoreList />
-    <LastPlayedQuiz />
+    <h1>Hello {{ username }}!</h1>
+    <div class="profile_flex">
+      <HighScoreList class="top_3" />
+      <ScoreList class="my_scores"/>
+      <LastPlayedQuiz class="last_played" />
+    </div>
   </div>
 </template>
 
 <script>
+import LastPlayedQuiz from '@/components/LastPlayedQuiz'
+import HighScoreList from '@/components/HighScoreList'
 import ScoreList from '@/components/ScoreList'
 import firebase from 'firebase'
-import HighscoreList from "@/components/HighscoreList";
-import LastPlayedQuiz from "@/components/LastPlayedQuiz";
 
 export default {
   name: "Profile",
   components: {
     ScoreList,
-    LastPlayedQuiz,
-    HighscoreList
+    HighScoreList,
+    LastPlayedQuiz
   },
   data() {
     return {
@@ -36,8 +38,32 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-  margin: 30px 0 30px 30px;
+h1 {
+  color: var(--color-text-primary);
+  margin: 30px 0 50px 40px;
+  letter-spacing: 2px;
+}
+.profile_flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top_3, .my_scores {
+  margin-bottom: 30px;
+}
+.last_played {
+  margin-bottom: 50px;
+}
+
+@media screen and (min-width: 1025px) {
+  .profile_flex {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+  }
+  .top_3, .my_scores, .last_played {
+    margin-bottom: 0;
+  }
 }
 
 </style>

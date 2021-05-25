@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <h2>Last Played:</h2>
-      <ul>
-        <li v-for="hs in highscore"
-            :key="hs.id">
-          <p>Name: {{hs.name}}</p>
-          <p>Score: {{hs.score}}</p>
-        </li>
-      </ul>
+  <div class="last_played">
+    <h2>Last Played</h2>
+    <ul>
+      <li v-for="hs in highscore"
+          :key="hs.id"
+      >
+        {{ hs.name }}
+        <span>{{ hs.score }}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -33,13 +34,37 @@ export default {
 </script>
 
 <style scoped>
+.last_played {
+  width: 400px;
+  height: 500px;
+  padding: 40px;
+  border-radius: 10px;
+  border: 3px solid var(--color-text-secondary);
+  background-color: var(--color-bg-secondary);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+h2 {
+  color: var(--color-bg-button);
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
 ul {
-  height: 250px;
-  border: 1px solid;
   overflow-y: auto;
+  height: 350px;
 }
 li {
-  padding-bottom: 10px;
-  padding-left: 5px;
+  list-style-type: none;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 18px;
+  color: var(--color-text-secondary);
 }
+span {
+  float: right;
+}
+ul::-webkit-scrollbar {
+  width: 0;
+}
+
 </style>

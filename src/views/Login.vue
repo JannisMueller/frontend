@@ -76,6 +76,7 @@ input {
   border-radius: 5px;
   padding-left: 10px;
   color: var(--color-text-secondary);
+  font-size: 18px;
 }
 input:first-of-type {
   margin-bottom: 20px;
@@ -105,6 +106,7 @@ input:focus {
 p {
   text-align: center;
   color: var(--color-text-secondary);
+  font-size: 18px;
 }
 a {
   color: var(--color-text-primary);

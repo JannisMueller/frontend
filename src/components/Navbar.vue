@@ -121,6 +121,9 @@ a {
   color: var(--color-text-secondary);
   cursor: pointer;
 }
+a:hover {
+  color: var(--color-text-primary);
+}
 .toggle_btn {
   position: absolute;
   top: 15px;

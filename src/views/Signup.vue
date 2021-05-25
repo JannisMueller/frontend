@@ -54,6 +54,7 @@ export default {
 h2 {
   margin: 70px 0 70px 0;
   font-weight: bold;
+  letter-spacing: 2px;
   color: var(--color-text-primary);
 }
 form {
@@ -72,7 +73,7 @@ input {
   border: 2px solid var(--color-text-secondary);
   padding-left: 10px;
   margin-bottom: 20px;
-
+  font-size: 18px;
 }
 input:focus {
   outline: none;
@@ -80,6 +81,7 @@ input:focus {
 p {
   width: 400px;
   margin-bottom: 50px;
+  font-size: 18px;
   color: var(--color-text-secondary);
 }
 .signup_btn {

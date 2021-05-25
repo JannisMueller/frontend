@@ -5,9 +5,8 @@
     <p>Here, let's learn the basic and important terms!</p>
     <div id="text">
       <div class="learn">
-        <p>
+        <p id="index">
           Index:<br>
-          <br>
           <a href="#p1">1. Class-Based</a><br>
           <a href="#p2">2. Object-Oriented</a><br>
           <a href="#p3">3. Java Development Kit</a><br>
@@ -81,6 +80,7 @@ export default {
   margin-left: 30px;
   margin-right: 30px;
   margin-bottom: 50px;
+  line-height: 160%;
 }
 #center {
   text-align: center;
@@ -100,6 +100,7 @@ p {
   color: var(--color-text-secondary);
   margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 18px;
 }
 a {
   text-decoration: none;
@@ -111,6 +112,9 @@ figure {
   height: 250px;
   background-image: url("../assets/learn-illustration.jpg");
   background-size: cover;
+}
+#index {
+  font-weight: bold;
 }
 
 </style>

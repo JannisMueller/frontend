@@ -59,6 +59,8 @@ figure {
   color: var(--color-text-secondary);
   max-width: 500px;
   margin: 0 30px 50px 30px;
+  font-size: 18px;
+  line-height: 160%;
 }
 
 a {

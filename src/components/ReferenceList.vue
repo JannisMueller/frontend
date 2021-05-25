@@ -4,7 +4,6 @@
     <figure></figure>
     <ul
         id="text"
-        :class="{ active: isActive }"
     >
       <li
           v-for="referenceData in referenceDataList"
@@ -24,8 +23,7 @@ export default {
   name: "ReferenceList",
   data() {
     return {
-      referenceDataList: referenceList,
-      isActive: true
+      referenceDataList: referenceList
     }
   }
 }
@@ -42,12 +40,6 @@ h2 {
   margin: 30px 0 30px 0;
   color: var(--color-text-primary);
 }
-ul {
-  display: none;
-}
-ul.active {
-  display: block;
-}
 li {
   color: var(--color-text-secondary);
   list-style-type: none;
@@ -56,6 +48,10 @@ li {
 }
 a {
   color: var(--color-bg-button);
+  font-weight: bold;
+}
+.dark a {
+  font-weight: normal;
 }
 #text {
   max-width: 700px;
