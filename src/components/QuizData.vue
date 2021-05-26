@@ -56,6 +56,7 @@
         <button class="restart_btn" @click="tryAgain">Restart</button>
       </div>
     </div>
+    <stopwatch></stopwatch>
   </div>
 </template>
 
@@ -63,8 +64,10 @@
 import firebase from 'firebase'
 import db from '@/firebaseInit'
 import axios from 'axios'
+import Stopwatch from "@/components/Stopwatch";
 export default {
   name: "QuizData",
+  components: {Stopwatch},
   data() {
     return {
       questions: [],
@@ -90,7 +93,7 @@ export default {
         name: this.username,
         date: new Date().toISOString().slice(0, 10)
       }
-      axios.post('http://localhost:3000/api/highscore/', higScore)
+      axios.post('http://188.150.101.33:3000/api/highscore/', higScore)
           .catch(err => console.log(err.message));
     },
     tryAgain() {
@@ -147,7 +150,7 @@ export default {
     }
   },
   mounted(){
-    fetch('http://localhost:3000/api/question/')
+    fetch('http://188.150.101.33:3000/api/question/')
         .then((response) => {
           return response.json();
         })
