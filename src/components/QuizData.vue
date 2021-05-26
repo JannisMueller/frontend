@@ -118,14 +118,16 @@ export default {
       this.timer = setInterval(() => {
         this.elapsedTime += 1000;
       }, 1000);
-      this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
+      this.timeInterval = setInterval(() => (this.timePassed += 1), 1000);
     },
     stop() {
       clearInterval(this.timer);
+      clearInterval(this.timeInterval)
       console.log(this.timePassed);
     },
     reset() {
       this.elapsedTime = 0;
+      this.timePassed = 0;
     },
     checkTime() {
       if (this.points === 5) {
@@ -152,7 +154,6 @@ export default {
         this.bonusMessage = null
         this.ifNotBonus = "(You need all answers to be correct to qualify for the time bonus!)"
       }
-
     },
 //////////////////
 
@@ -172,6 +173,8 @@ export default {
       this.picked = []
       this.points = 0
       this.scoreList = []
+      this.bonusMessage = null
+      this.ifNotBonus = null
       this.reset()
       this.start()
     },
