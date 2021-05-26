@@ -186,7 +186,7 @@ export default {
         return;
       }
       this.questionIndex++;
-      if (this.picked[this.questionIndex-1] === this.questions[this.questionIndex-1].correctAnswer) {
+      if (this.picked[this.questionIndex - 1] === this.questions[this.questionIndex - 1].correctAnswer) {
         this.points++;
         this.isCorrect = true;
         console.log("Correct answer : " + this.points);
@@ -205,8 +205,8 @@ export default {
 
     checkScore() {
       let answer = {
-        id: this.questionIndex-1,
-        title: this.questions[this.questionIndex-1].questionTitle,
+        id: this.questionIndex - 1,
+        title: this.questions[this.questionIndex - 1].questionTitle,
         correct: this.isCorrect
       };
       return this.scoreList.push(answer);
@@ -214,7 +214,7 @@ export default {
 
     prev() {
       this.questionIndex--;
-      this.scoreList.splice(this.questionIndex,1);
+      this.scoreList.splice(this.questionIndex, 1);
     },
 
     saveScore() {
