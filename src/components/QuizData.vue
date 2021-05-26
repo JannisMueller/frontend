@@ -1,13 +1,14 @@
 <template>
   <div class="question_flex">
     <div class="questions">
+
       <div
           v-for="(question, index) in questions"
           :key="question.questionId">
         <div v-show="index === questionIndex">
           <h2 class="question_title"> {{ question.questionTitle }}/{{ questions.length }} </h2>
           <h3 class="question"> {{ question.question }} </h3>
-          <StopWatch />
+
           <figure>
             <img :src="getImage(question.questionImg)" alt="code">
           </figure>
@@ -27,8 +28,10 @@
           <button class="next_btn" @click="next">Next</button>
 <!--          <button class="next_btn" v-if="questionIndex < questions.length-1" @click="next">Next</button>-->
 <!--          <button class="next_btn" v-if="questionIndex == questions.length-1" @click="saveToHighScore">Next</button>-->
+
         </div>
       </div>
+
       <div v-show="questionIndex === questions.length">
         <div v-if="points === 0">
           <p class="result_img">&#128533;</p>
@@ -42,7 +45,7 @@
           <p class="result_img">&#128578;</p>
           <p class="result_message">Not bad!</p>
         </div>
-        <p id="score">Total score: {{ points }}/{{ questions.length }}</p>
+        <p id="score">Total score: {{ points }}/{{ questions.length }} {{bonusMessage}}</p>
         <ul>
           <li v-for="score in scoreList"
               :key="score.id"
@@ -56,6 +59,10 @@
         </ul>
         <button class="restart_btn" @click="tryAgain">Restart</button>
       </div>
+      <div class="clock_flex">
+        <p id="time">{{ formattedElapsedTime }}</p>
+      </div>
+      <p>{{ifNotBonus}}</p>
     </div>
   </div>
 </template>
@@ -64,12 +71,10 @@
 import firebase from 'firebase'
 import db from '@/firebaseInit'
 import axios from 'axios'
-import StopWatch from '@/components/StopWatch'
 export default {
+
   name: "QuizData",
-  components: {
-    StopWatch
-  },
+
   data() {
     return {
       questions: [],
@@ -78,9 +83,16 @@ export default {
       points: 0,
       scoreList: [],
       isCorrect: false,
-      username: ''
+      username: '',
+      elapsedTime: 0,
+      timer: undefined,
+      timePassed: null,
+      timeInterval: null,
+      bonusMessage: null,
+      ifNotBonus: null
     }
   },
+
   created() {
     const user = firebase.auth().currentUser;
 
@@ -88,8 +100,64 @@ export default {
       this.username = user.displayName;
     }
   },
+
+  computed: {
+
+    formattedElapsedTime() {
+      const date = new Date(null);
+      date.setSeconds(this.elapsedTime / 1000);
+      const utc = date.toUTCString();
+      return utc.substr(utc.indexOf(":") - 2, 8);
+    }
+  },
+
   methods: {
+
+//////clock////////
+    start() {
+      this.timer = setInterval(() => {
+        this.elapsedTime += 1000;
+      }, 1000);
+      this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
+    },
+    stop() {
+      clearInterval(this.timer);
+      console.log(this.timePassed);
+    },
+    reset() {
+      this.elapsedTime = 0;
+    },
+    checkTime() {
+      if (this.points === 5) {
+        if (this.timePassed <= 120) {
+          this.bonusMessage = "(Time Bonus = 2 points!)"
+          this.ifNotBonus = null
+          return this.points += 2
+        }
+        if (this.timePassed > 120 && this.timePassed < 180) {
+          this.bonusMessage = "(Time Bonus = 1 point!)"
+          this.ifNotBonus = null
+          return this.points += 1
+        }
+        else if (this.timePassed == 360) {
+          this.ifNotBonus = null
+          //pop-up + end game then restart option or exit
+        }
+        else {
+          this.bonusMessage = "(No time bonus)"
+          this.ifNotBonus = null
+        }
+      }
+      else {
+        this.bonusMessage = null
+        this.ifNotBonus = "(You need all answers to be correct to qualify for the time bonus!)"
+      }
+
+    },
+//////////////////
+
     saveToHighScore() {
+      this.checkTime();
       let higScore = {
         score: this.points.toString(),
         name: this.username,
@@ -98,15 +166,20 @@ export default {
       axios.post('http://188.150.101.33:3000/api/highscore/', higScore)
           .catch(err => console.log(err.message));
     },
+
     tryAgain() {
       this.questionIndex = 0
       this.picked = []
       this.points = 0
       this.scoreList = []
+      this.reset()
+      this.start()
     },
+
     getImage(image) {
       return require('@/assets/quiz/' + image);
     },
+
     next() {
       if (this.picked[this.questionIndex] === undefined) {
         alert('Please choose an answer!');
@@ -126,8 +199,10 @@ export default {
       if (this.questionIndex === this.questions.length) {
         this.saveScore();
         this.saveToHighScore();
+        this.stop();
       }
     },
+
     checkScore() {
       let answer = {
         id: this.questionIndex-1,
@@ -136,10 +211,12 @@ export default {
       };
       return this.scoreList.push(answer);
     },
+
     prev() {
       this.questionIndex--;
       this.scoreList.splice(this.questionIndex,1);
     },
+
     saveScore() {
       db
           .collection("users")
@@ -151,16 +228,18 @@ export default {
           });
     }
   },
-  mounted(){
-    fetch('http://188.150.101.33:3000/api/question/')
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          this.questions = data;
-        });
-  }
+    mounted() {
+      fetch('http://188.150.101.33:3000/api/question/')
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            this.questions = data;
+          });
+      this.start()
+    }
+
 }
 </script>
 
@@ -316,5 +395,12 @@ li {
 }
 li:not(:last-of-type) {
   margin-bottom: 10px;
+}
+#time {
+  color: var(--color-text-primary);
+  font-size: 24px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  letter-spacing: 2px;
 }
 </style>
