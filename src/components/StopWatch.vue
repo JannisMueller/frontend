@@ -1,15 +1,15 @@
 <template>
-  <div id="app">
+  <div class="clock_flex">
     <button @click="start">Start</button>
     <button @click="stop">Stop</button>
     <button @click="reset">Reset</button>
-    <p>{{formattedElapsedTime}}</p>
+    <p id="time">{{ formattedElapsedTime }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "App",
+  name: "StopWatch",
   data() {
     return {
       elapsedTime: 0,
@@ -37,10 +37,15 @@ export default {
       this.elapsedTime = 0;
     }
   }
-};
+}
 </script>
 
 <style scoped>
-
+#time {
+  color: var(--color-text-primary);
+  font-size: 24px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
 
 </style>

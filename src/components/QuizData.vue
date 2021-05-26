@@ -7,6 +7,7 @@
         <div v-show="index === questionIndex">
           <h2 class="question_title"> {{ question.questionTitle }}/{{ questions.length }} </h2>
           <h3 class="question"> {{ question.question }} </h3>
+          <StopWatch />
           <figure>
             <img :src="getImage(question.questionImg)" alt="code">
           </figure>
@@ -56,7 +57,6 @@
         <button class="restart_btn" @click="tryAgain">Restart</button>
       </div>
     </div>
-    <stopwatch></stopwatch>
   </div>
 </template>
 
@@ -64,10 +64,12 @@
 import firebase from 'firebase'
 import db from '@/firebaseInit'
 import axios from 'axios'
-import Stopwatch from "@/components/Stopwatch";
+import StopWatch from '@/components/StopWatch'
 export default {
   name: "QuizData",
-  components: {Stopwatch},
+  components: {
+    StopWatch
+  },
   data() {
     return {
       questions: [],
