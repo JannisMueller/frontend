@@ -1,14 +1,12 @@
 <template>
   <div class="question_flex">
     <div class="questions">
-
       <div
           v-for="(question, index) in questions"
           :key="question.questionId">
         <div v-show="index === questionIndex">
           <h2 class="question_title"> {{ question.questionTitle }}/{{ questions.length }} </h2>
           <h3 class="question"> {{ question.question }} </h3>
-
           <figure>
             <img :src="getImage(question.questionImg)" alt="code">
           </figure>
@@ -26,9 +24,6 @@
           </div>
           <button class="prev_btn" v-if="questionIndex > 0" @click="prev">Back</button>
           <button class="next_btn" @click="next">Next</button>
-<!--          <button class="next_btn" v-if="questionIndex < questions.length-1" @click="next">Next</button>-->
-<!--          <button class="next_btn" v-if="questionIndex == questions.length-1" @click="saveToHighScore">Next</button>-->
-
         </div>
       </div>
 
@@ -48,20 +43,17 @@
         <p id="score">Total score: {{ points }}/{{ questions.length }} {{bonusMessage}}</p>
         <ul>
           <li v-for="score in scoreList"
-              :key="score.id"
-          >
+              :key="score.id">
             {{ score.title }}
             <span v-if="score.correct">✔️</span>
             <span v-else>❌</span>
-            <!--            <font-awesome-icon v-if="score.correct" :icon="['fas', 'check']" />-->
-            <!--            <font-awesome-icon v-else :icon="['fas', 'times']" />-->
           </li>
         </ul>
         <button class="restart_btn" @click="tryAgain">Restart</button>
       </div>
-      <div class="clock_flex">
-        <p id="time">{{ formattedElapsedTime }}</p>
-      </div>
+    <div class="clock_flex">
+      <p id="time">{{ formattedElapsedTime }}</p>
+    </div>
       <p>{{ifNotBonus}}</p>
     </div>
   </div>
