@@ -9,8 +9,10 @@
           v-for="referenceData in referenceDataList"
           :key="referenceData.referenceId"
       >
-        {{ referenceData.referenceName }}<br>
-        <a :href="referenceData.referenceURL" target="_blank">{{ referenceData.referenceURL }}</a>
+        {{ referenceData.referenceName }}
+        <a :href="referenceData.referenceURL" target="_blank">
+          <font-awesome-icon :icon="['fas', 'external-link-alt']" />
+        </a>
       </li>
     </ul>
   </div>
