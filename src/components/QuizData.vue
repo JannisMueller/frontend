@@ -155,7 +155,7 @@ export default {
         name: this.username,
         date: new Date().toISOString().slice(0, 10)
       }
-      axios.post('http://localhost:3000/api/highscore/', higScore)
+      axios.post('http://188.150.101.33:3000/api/highscore/', higScore)
           .catch(err => console.log(err.message));
     },
 
@@ -191,8 +191,8 @@ export default {
       this.checkScore();
 
       if (this.questionIndex === this.questions.length) {
-        this.saveScore();
         this.saveToHighScore();
+        this.saveScore();
         this.stop();
       }
     },
@@ -223,7 +223,7 @@ export default {
     }
   },
     mounted() {
-      fetch('http://localhost:3000/api/question/')
+      fetch('http://188.150.101.33:3000/api/question/')
           .then((response) => {
             return response.json();
           })
