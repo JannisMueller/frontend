@@ -115,7 +115,6 @@ export default {
     stop() {
       clearInterval(this.timer);
       clearInterval(this.timeInterval)
-      console.log(this.timePassed);
     },
     reset() {
       this.elapsedTime = 0;
@@ -132,10 +131,6 @@ export default {
           this.bonusMessage = "(Time Bonus = 1 point!)"
           this.ifNotBonus = null
           return this.points += 1
-        }
-        else if (this.timePassed == 360) {
-          this.ifNotBonus = null
-          //pop-up + end game then restart option or exit
         }
         else {
           this.bonusMessage = "(No time bonus)"

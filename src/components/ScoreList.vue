@@ -4,8 +4,7 @@
     <ul>
       <li
           v-for="score in scores"
-          :key="score.id"
-      >
+          :key="score.id">
         {{ score.score }}
         <span>{{ score.date }}</span>
       </li>
