@@ -2,10 +2,11 @@
   <div class="learn">
     <h2>Learn Basic Terms of Java</h2>
     <figure></figure>
-    <p>Here, let's learn the basic and important terms!</p>
     <div id="text">
       <div class="learn">
         <p id="index">
+          Here, let's learn the basic and important terms!<br>
+          <br>
           Index:<br>
           <a href="#p1">1. Class-Based</a><br>
           <a href="#p2">2. Object-Oriented</a><br>

@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted(){
-    fetch('http://188.150.101.33:3000/api/highscore/top3/')
+    fetch('http://localhost:3000/api/highscore/top3/')
         .then((response) => {
           return response.json();
         })

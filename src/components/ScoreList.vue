@@ -25,7 +25,7 @@ export default {
   },
   created() {
     db.collection('users').doc(firebase.auth().currentUser.uid)
-    .collection('scores').orderBy("score", "desc").limit(5).get()
+    .collection('scores').orderBy("score", "desc").get()
     .then(snapshot => {
       snapshot.forEach(doc => {
         let score = doc.data()
@@ -43,7 +43,7 @@ export default {
   height: 500px;
   padding: 40px;
   border-radius: 10px;
-  border: 3px solid var(--color-text-secondary);
+  border: 2px solid var(--color-text-secondary);
   background-color: var(--color-bg-secondary);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }

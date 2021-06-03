@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted(){
-    fetch('http://188.150.101.33:3000/api/highscore/')
+    fetch('http://localhost:3000/api/highscore/')
         .then((response) => {
           return response.json();
         })
@@ -39,7 +39,7 @@ export default {
   height: 500px;
   padding: 40px;
   border-radius: 10px;
-  border: 3px solid var(--color-text-secondary);
+  border: 2px solid var(--color-text-secondary);
   background-color: var(--color-bg-secondary);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }

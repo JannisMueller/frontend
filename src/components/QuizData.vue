@@ -27,20 +27,24 @@
         </div>
       </div>
 
-      <div v-show="questionIndex === questions.length">
+      <div
+          class="result_flex"
+          v-show="questionIndex === questions.length"
+      >
         <div v-if="points === 0">
           <p class="result_img">&#128533;</p>
           <p class="result_message">Did you even try?</p>
         </div>
-        <div v-else-if="points === 5">
-          <p class="result_img">&#127942;</p>
-          <p class="result_message">Congrats!</p>
-        </div>
-        <div v-else>
+        <div v-else-if="points <= 4">
           <p class="result_img">&#128578;</p>
           <p class="result_message">Not bad!</p>
         </div>
-        <p id="score">Total score: {{ points }}/{{ questions.length }} {{bonusMessage}}</p>
+        <div v-else>
+          <p class="result_img">&#127942;</p>
+          <p class="result_message">Congrats!</p>
+        </div>
+        <p id="score">Total score: {{ points }}/{{ questions.length }}</p>
+        <strong id="time_bonus">{{ bonusMessage }}</strong>
         <ul>
           <li v-for="score in scoreList"
               :key="score.id">
@@ -54,7 +58,7 @@
     <div class="clock_flex">
       <p id="time">{{ formattedElapsedTime }}</p>
     </div>
-      <p>{{ifNotBonus}}</p>
+      <p id="not_bonus">{{ ifNotBonus }}</p>
     </div>
   </div>
 </template>
@@ -151,7 +155,7 @@ export default {
         name: this.username,
         date: new Date().toISOString().slice(0, 10)
       }
-      axios.post('http://188.150.101.33:3000/api/highscore/', higScore)
+      axios.post('http://localhost:3000/api/highscore/', higScore)
           .catch(err => console.log(err.message));
     },
 
@@ -219,7 +223,7 @@ export default {
     }
   },
     mounted() {
-      fetch('http://188.150.101.33:3000/api/question/')
+      fetch('http://localhost:3000/api/question/')
           .then((response) => {
             return response.json();
           })
@@ -256,7 +260,7 @@ export default {
   letter-spacing: 2px;
 }
 .question {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   color: var(--color-text-primary);
   font-weight: normal;
   font-size: 20px;
@@ -273,8 +277,9 @@ figure {
   justify-content: center;
   align-items: center;
   width: 400px;
+  height: 290px;
   margin-bottom: 20px;
-  border: 3px solid var(--color-text-secondary);
+  border: 2px solid var(--color-text-secondary);
   border-radius: 5px;
   background-color: var(--color-bg-secondary);
 }
@@ -318,7 +323,6 @@ label {
   color: var(--color-text-button);
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 20px;
   cursor: pointer;
   letter-spacing: 2px;
 }
@@ -329,9 +333,10 @@ label {
   border: 0;
   border-radius: 5px;
   width: 100%;
-  padding: 10px 0;
+  padding: 15px 0;
   color: var(--color-text-button);
   letter-spacing: 2px;
+  text-transform: uppercase;
 }
 .restart_btn:focus {
   outline: 0;
@@ -354,7 +359,7 @@ label {
   outline: 0;
 }
 .result_img {
-  margin: 70px 0 50px 0;
+  margin: 50px 0 50px 0;
   font-size: 100px;
   text-align: center;
 }
@@ -371,12 +376,15 @@ label {
   font-weight: bold;
   color: var(--color-text-secondary);
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   letter-spacing: 3px;
 }
+#time_bonus {
+  color: var(--color-text-secondary);
+  font-size: 18px;
+}
 ul {
-  margin-bottom: 30px;
-  margin-left: 50px;
+  margin: 20px 0 30px 50px;
 }
 li {
   font-size: 18px;
@@ -389,8 +397,12 @@ li:not(:last-of-type) {
 #time {
   color: var(--color-text-primary);
   font-size: 24px;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin: 20px 0 20px 0;
   letter-spacing: 2px;
+}
+#not_bonus {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: var(--color-text-secondary);
 }
 </style>

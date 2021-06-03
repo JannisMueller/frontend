@@ -1,17 +1,16 @@
 <template>
-  <nav>
+  <nav @click="toggleNavbar">
     <h1>JavaJourney</h1>
     <ul
-        :class="{ active: isActive }"
+        :class="{ 'active': isActive }"
     >
-      <li @click="toggleNavbar">
+      <li>
         <router-link v-if="user" to="/profile">Profile</router-link>
         <router-link v-else to="/">Home</router-link>
       </li>
       <li
           v-for="(link, index) in links"
           :key="index"
-          @click="toggleNavbar"
       >
         <router-link
             :to="link.path"
@@ -19,7 +18,7 @@
           {{ link.name}}
         </router-link>
       </li>
-      <li @click="toggleNavbar">
+      <li>
         <a v-if="user" @click="logout">Log Out</a>
         <router-link v-else to="/login">Log In</router-link>
       </li>
@@ -28,13 +27,12 @@
         <font-awesome-icon class="sun_btn" :icon="['fas', 'sun']" size="lg" v-else />
       </li>
     </ul>
-    <font-awesome-icon class="toggle_btn" :icon="['fas', 'bars']" size="2x" @click="toggleNavbar" />
+    <font-awesome-icon class="toggle_btn" :icon="['fas', 'bars']" size="2x" />
   </nav>
 </template>
 
 <script>
 import firebase from 'firebase'
-
 export default {
   name: 'NavBar',
   props: ['links'],
@@ -60,18 +58,18 @@ export default {
   methods: {
     toggleNavbar() {
       this.isActive = !this.isActive;
+
+    },
+    toggleTheme() {
+      const bodyEl = document.querySelector('body');
+      bodyEl.classList.toggle('dark');
+      this.darkMode = !this.darkMode;
     },
     logout() {
       firebase.auth().signOut().then(() => {
         this.$router.push('/login').catch(() => {});
         // https://stackoverflow.com/questions/62462276/how-to-solve-avoided-redundant-navigation-to-current-location-error-in-vue
       });
-    },
-    toggleTheme() {
-      const bodyEl = document.querySelector('body');
-      bodyEl.classList.toggle('dark');
-      this.darkMode = !this.darkMode;
-      // TODO: localstorage
     }
   }
 }
@@ -97,7 +95,6 @@ nav {
 .dark nav {
   box-shadow: none;
 }
-
 h1 {
   font-family: Norwester, 'Roboto', sans-serif;
   letter-spacing: 2px;
@@ -135,7 +132,6 @@ a:hover {
   cursor: pointer;
   color: var(--color-bg-button);
 }
-
 @media screen and (min-width: 1025px) {
   nav {
     flex-direction: row;
@@ -154,5 +150,4 @@ a:hover {
     display: none;
   }
 }
-
 </style>
